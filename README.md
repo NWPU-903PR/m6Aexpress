@@ -29,6 +29,7 @@ In user's python IDE platform, e.g.Spyder or pycharm, load the following python 
 # Installation Instructions
 The version of current package was supported by R 3.5.3 not R 3.6 or R 4.0
 Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
+
 > if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 >
@@ -45,7 +46,7 @@ Firstly, we need to install exomePeak package to do the peak calling for m6A met
 > devtools::install_github("ZW-xjtlu/exomePeak")
 
 Then, we installed the QNB package to detect the differential m6A methylation sites.
-> install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz")
+> install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
 
 Installed the reticulate pacakge to call python code in R
 > install.packages("reticulate")
