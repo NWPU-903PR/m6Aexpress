@@ -5,16 +5,27 @@ m6A-express is a tool to uncover the complex and condition-specific m6A regulati
 Before installing m6A-express package, user should have installed python 2.7 software in their platform (Windows systerm or Linux systerm). And some python packages should be installed, such as numpy, statsmodels.api, pandas, scipy. 
 In user's python IDE platform, e.g.Spyder or pycharm, load the following python packages.
 > import numpy as np
+> 
 > import re
+> 
 > import sys
+> 
 > import numpy as np
+> 
 > import statsmodels.api as sm
+> 
 > import pandas as pd
+> 
 > from scipy.optimize import minimize
+> 
 > from scipy.optimize import minimize_scalar
+> 
 > from scipy.stats import nbinom
+> 
 > from scipy.special import digamma
+> 
 > import statsmodels.sandbox as sms
+> 
 # Installation Instructions
 Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
 > if (!requireNamespace("BiocManager", quietly = TRUE))
