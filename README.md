@@ -30,6 +30,7 @@ In user's python IDE platform, e.g.Spyder or pycharm, load the following python 
 Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
 > if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
+>
 > BiocManager::install(c("SummarizedExperiment","cqn","Rsamtools",
                        "GenomicAlignments","GenomicRanges","GenomicFeatures",
                        "DESeq2","ggplot2","mclust",
@@ -39,6 +40,7 @@ Firstly, we need to install exomePeak package to do the peak calling for m6A met
 
 > if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
+>
 > devtools::install_github("ZW-xjtlu/exomePeak")
 
 Then, we installed the QNB package to detect the differential m6A methylation sites.
