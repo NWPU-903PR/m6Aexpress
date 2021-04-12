@@ -27,6 +27,7 @@ In user's python IDE platform, e.g.Spyder or pycharm, load the following python 
 > import statsmodels.sandbox as sms
 > 
 # Installation Instructions
+The version of current package was supported by R 3.5.3 not R 3.6 or R 4.0
 Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
 > if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
