@@ -5,18 +5,18 @@ m6A-express is a tool to uncover the complex and condition-specific m6A regulati
 Before installing m6A-express package, user should have installed python 2.7 software in their platform (Windows systerm or Linux systerm). And some python packages should be installed, such as numpy, statsmodels.api, pandas, scipy. 
 # Installation Instructions
 Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
-if (!requireNamespace("BiocManager", quietly = TRUE))
+> if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-BiocManager::install(c("SummarizedExperiment","cqn","Rsamtools",
+> BiocManager::install(c("SummarizedExperiment","cqn","Rsamtools",
                        "GenomicAlignments","GenomicRanges","GenomicFeatures",
                        "DESeq2","ggplot2","mclust",
                        "genefilter","BSgenome","BiocParallel",
                        "IRanges","S4Vectors","quantreg",
                        "reshape2","rtracklayer","apeglm","RMariaDB"))
 
-if (!requireNamespace("devtools", quietly = TRUE))
+> if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
-devtools::install_github("ZW-xjtlu/exomePeak")
+> devtools::install_github("ZW-xjtlu/exomePeak")
 
 Then, we installed the QNB package to detect the differential m6A methylation sites.
 > devtools::install_github("NWPU-903PR/QNB")
