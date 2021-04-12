@@ -44,7 +44,7 @@ Firstly, we need to install exomePeak package to do the peak calling for m6A met
 > devtools::install_github("ZW-xjtlu/exomePeak")
 
 Then, we installed the QNB package to detect the differential m6A methylation sites.
-> devtools::install_github("NWPU-903PR/QNB")
+> install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz")
 
 Installed the reticulate pacakge to call python code in R
 > install.packages("reticulate")
