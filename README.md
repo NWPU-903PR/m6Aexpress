@@ -53,6 +53,10 @@ Installed the reticulate pacakge to call python code in R
 
 > install.packages("reticulate")
 
+Installed the minconda for python 2.7
+
+> py_install("statsmodels"); py_install("pandas");
+> py
 Before install the m6Aexpress package, you should install the following R package:
 
 > BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','org.Sc.sgd.db','Rsubread',' 
