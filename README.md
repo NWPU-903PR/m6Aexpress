@@ -46,15 +46,23 @@ Firstly, we need to install exomePeak package to do the peak calling for m6A met
 > devtools::install_github("ZW-xjtlu/exomePeak")
 
 Then, we installed the QNB package to detect the differential m6A methylation sites.
+
 > install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
 
 Installed the reticulate pacakge to call python code in R
+
 > install.packages("reticulate")
 
+Before install the m6Aexpress package, you should install the following R package:
+
+> BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','org.Sc.sgd.db','Rsubread',' 
+                         'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
+                          'TxDb.Mmusculus.UCSC.mm10.knownGene','TxDb.Scerevisiae.UCSC.sacCer3.sgdGene',
+                           'AnnotationDbi'))
+                       
 The m6A-express package can be installed by the following R commands:
 > devtools::install_github("NWPU-903PR/m6Aexpress")
-The m6A-express package can be installed by the following R commands:
-> devtools::install_github("NWPU-903PR/m6Aexpress")
+
 
 > library(m6Aexpress)
 
