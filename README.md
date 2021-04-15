@@ -27,18 +27,18 @@ In user's python IDE platform, e.g.Spyder or pycharm, load the following python 
 > import statsmodels.sandbox as sms
 > 
 # Installation Instructions
-The version of current package was supported by R 3.5.3 not R 3.6 or R 4.0
+The version of current package was supported by R 3.5.3 or new version
 Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
 
 > if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 >
-> BiocManager::install(c("SummarizedExperiment","cqn","Rsamtools",
+> BiocManager::install(c("SummarizedExperiment","Rsamtools",
                        "GenomicAlignments","GenomicRanges","GenomicFeatures",
                        "DESeq2","ggplot2","mclust",
                        "genefilter","BSgenome","BiocParallel",
                        "IRanges","S4Vectors","quantreg",
-                       "reshape2","rtracklayer","apeglm","RMariaDB"))
+                       "reshape2","rtracklayer","apeglm"))
 
 > if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
@@ -52,26 +52,24 @@ Then, we installed the QNB package to detect the differential m6A methylation si
 Installed the reticulate pacakge to call python code in R
 
 > install.packages("reticulate")
+> ##install miniconda to install specific python package
+> install_miniconda()
+> ##install specific python package in R
+> py_install("statsmodels"); py_install("pandas); py_install("scipy"); py_install("numpy")
 
-Installed the minconda for python 2.7
-
-> py_install("statsmodels"); py_install("pandas");
-> py
 Before install the m6Aexpress package, you should install the following R package:
 
-> BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','org.Sc.sgd.db','Rsubread',' 
+> BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
                          'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
-                          'TxDb.Mmusculus.UCSC.mm10.knownGene','TxDb.Scerevisiae.UCSC.sacCer3.sgdGene',
                            'AnnotationDbi'))
                        
 The m6A-express package can be installed by the following R commands:
 > devtools::install_github("NWPU-903PR/m6Aexpress")
 
-
 > library(m6Aexpress)
 
 # Usage Example
-The following command code will show how to use this package and output m6A methylation regulated expression gene in excel files
+The following command code will show how to use this package and output m6A methylation regulated expression gene in excel files. The input data for m6Aexpress package includes the INPUT and IP BAM files from MeRIP-seq data. The INPUT BAM files are used to quantify the gene expression under specific context. The IP BAM files with paired INPUT BAM files are used to quantify the methylation intensity for each gene in specific context. m6Aexpress model could detect the correlation between gene expression and methylation and predicated some gene sets, whose gene expression are significantly regulated by methylation in specific context. m6Aexpress can predicate m6A regulated expression gene (m6A-reg-exp) in differential expression and differential methylation context. m6Aexpress can also predicate m6A-re-exp genes 
 ## Basic mode: pooled samples from one or multiple conditions together and identify m6A regulated expression gene in a specific context.
 ### Input BAM files.
 > f1 <- system.file("extdata", "IP1.bam", package="m6Aexpress")
