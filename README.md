@@ -30,7 +30,9 @@ Installed the reticulate pacakge to call python code in R
 > ##install miniconda to install specific python package
 
 > install_miniconda()
+
 > ##install specific python package in R
+>
 > py_install("statsmodels"); py_install("pandas); py_install("scipy"); py_install("numpy")
 
 Before install the m6Aexpress package, you should install the following R package:
