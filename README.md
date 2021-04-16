@@ -69,8 +69,8 @@ The m6A-express package can be installed by the following R commands:
 > library(m6Aexpress)
 
 # Usage Example
-The following command code will show how to use this package and output m6A methylation regulated expression gene in excel files. The input data for m6Aexpress package includes the INPUT and IP BAM files from MeRIP-seq data. The INPUT BAM files are used to quantify the gene expression under specific context. The IP BAM files with paired INPUT BAM files are used to quantify the methylation intensity for each gene in specific context. m6Aexpress model could detect the correlation between gene expression and methylation and predicated some gene sets, whose gene expression are significantly regulated by methylation in specific context. m6Aexpress can predicate m6A regulated expression gene (m6A-reg-exp) in differential expression and differential methylation context. m6Aexpress can also predicate m6A-re-exp genes in high va (multiple sub-groups) context, which considered high dynamic peak or high variable peak sites across sub-tissue and predicate m6A-reg-exp genes with high variable peak.
-Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context and tissue-specific context. The following will introduce how to use m6Aexpress package step by step or only on step to obtain significant m6A-reg-exp gene.
+The following command code will show how to use this package and output m6A methylation regulated expression gene in excel files. The input data for m6Aexpress package includes the INPUT and IP BAM files from MeRIP-seq data. The INPUT BAM files are used to quantify the gene expression under specific context. The IP BAM files with paired INPUT BAM files are used to quantify the methylation intensity for each gene in specific context. m6Aexpress model could detect the correlation between gene expression and methylation and predicated some gene sets, whose gene expression are significantly regulated by methylation in specific context. m6Aexpress can predicate m6A regulated expression gene (m6A-reg-exp) in differential expression and differential methylation context. m6Aexpress can also predicate m6A-re-exp genes in high variable peak context. The high variable peak or high dynamic peak means that peak sites have higher coefficient of variation (CV) of their methylation level across multiple samples, such as sub-tissues, multiple cell lines.
+Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context and high dynamic peak context. The following will introduce how to use m6Aexpress package step by step or only on step to obtain significant m6A-reg-exp gene.
 ## Step by Step Analysis
 ### Differential expression and differential methylation context
 #### Peak calling for methylation sites in DE-DM context and obtain consisten peak sites
@@ -131,7 +131,7 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
 > m6A\_express\_addLFC\_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene, 
                                     DE_gene=DE_gene, methy_distdecay=DM_methy,
                                     num_cond1=2, OUTPUT_DIR=NA)
-### Tissue-specific context
+### In High variable peak context
 #### Peak calling for multiple sub-tissue
 > IP\_BAM <- c(f1,f2,f3,f4)
 > INPUT\_BAM <- c(f5,f6,f7,f8)
@@ -154,15 +154,21 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
                      CUTOFF_TYPE="FDR", 
                       FDR=0.05)
 
-## DE-DM mode: In this case, we will detect whether the differential m6A methylation peak sites regulated expression that caused the differential expression genes
-### Predict the differential expression genes are regulated by differential methylation peak sites by m6A-express model
-
+## On step to predicate m6A-reg-exp gene
+### In DE-DM context
 > IP\_BAM <- c(f1,f2)
-
 > TREATED\_IP\_BAM <- c(f3,f4)
-
 > INPUT\_BAM <- c(f5,f6)
-
 > TREATED\_INPUT\_BAM <- c(f7,f8)
+> m6A\_reg\_exp\_gene <- m6Aexpress(express_data=INPUT_BAM, treated_express_data=TREATED_INPUT_BAM, 
+>                                    IP_BAM=IP_BAM, TREATED_IP_BAM=TREATED_IP_BAM, INPUT_BAM=INPUT_BAM, 
+>                                    TREATED_INPUT_BAM=TREATED_INPUT_BAM,annot_type="hg19", GENE_ANNO_GTF=gtf,
+>                                    isGTFAnnotationFile=TRUE, pvalue=0.05,mode="DE-DM")
+>                                    
+### In HVP context
+> IP\_BAM <- c(f1,f2,f3,f4)
+> INPUT\_BAM <- c(f5,f6,f7,f8)
+> m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, IP_BAM=IP_BAM, INPUT_BAM=INPUT_BAM, 
+>                                annot_type="hg19", GENE_ANNO_GTF=gtf,isGTFAnnotationFile=TRUE, 
+>                                pvalue=0.05,mode="HVP", CV_values = 0.3, num_sample_subgroup=c(2,2))
 
-> m6A\_reg\_exp\_gene <- m6Aexpress(express_data=INPUT_BAM, treated_express_data=TREATED_INPUT_BAM, IP_BAM=IP_BAM, TREATED_IP_BAM=TREATED_IP_BAM, INPUT_BAM=INPUT_BAM, TREATED_INPUT_BAM=TREATED_INPUT_BAM,annot_type="hg19", GENE_ANNO_GTF=gtf,pvalue=0.05,mode="DE-DM")
