@@ -77,9 +77,11 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
 > TREATED\_INPUT\_BAM <- c(f7,f8)
 
 > #Input the gene annotation file 
+> 
 > gtf <- system.file("extdata", "hg19toy.gtf", package="m6Aexpress")
  
 > #Obtain the consistent peak sites
+> 
 > Get\_peak\_infor <- Get_peak_sites(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
 #### Differential methylation analysis for the consistent peak sites in case-control context
 > DM\_sites\_infor <- DM_detect(peak_inform=Get_peak_infor,DM_CUTOFF_TYPE="pvalue",num_ctl=2, diff_peak_pvalue=0.05)
