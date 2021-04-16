@@ -12,9 +12,9 @@ Firstly, we need to install exomePeak package to do the peak calling for m6A met
                       "GenomicAlignments","GenomicRanges","GenomicFeatures",                       
                        "DESeq2","ggplot2","mclust",
                        "genefilter","BSgenome","BiocParallel",
-                       "IRanges","S4Vectors","quantreg",
-                       "reshape2","rtracklayer","apeglm"))
->
+                      "IRanges","S4Vectors","quantreg",
+>                       "reshape2","rtracklayer","apeglm"))
+
 > if (!requireNamespace("devtools", quietly = TRUE))
     install.packages("devtools")
 >
