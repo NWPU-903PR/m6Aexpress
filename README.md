@@ -114,7 +114,9 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
 ### In High variable peak context
 #### Peak calling for multiple sub-tissue
 > IP\_BAM <- c(f1,f2,f3,f4)
+> 
 > INPUT\_BAM <- c(f5,f6,f7,f8)
+> 
 > Get\_peak\_infor <- Get_peak_sites(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
 #### Detect high variable peak sites across multiple sub-tissues
 > HVP\_infor <- obtain_HVP_sites(peak_inform=Get_peak_infor,CV_values=0.3,
