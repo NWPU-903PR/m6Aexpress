@@ -28,7 +28,7 @@ Installed the reticulate pacakge to call python code in R
 > install.packages("reticulate")
 
 > ##install miniconda to install specific python package
-
+>
 > install_miniconda()
 
 > ##install specific python package in R
