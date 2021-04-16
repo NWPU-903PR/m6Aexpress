@@ -26,7 +26,9 @@ Then, we installed the QNB package to detect the differential m6A methylation si
 Installed the reticulate pacakge to call python code in R
 
 > install.packages("reticulate")
+
 > ##install miniconda to install specific python package
+
 > install_miniconda()
 > ##install specific python package in R
 > py_install("statsmodels"); py_install("pandas); py_install("scipy"); py_install("numpy")
