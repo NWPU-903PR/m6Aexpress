@@ -48,6 +48,7 @@ The m6A-express package can be installed by the following R commands:
 
 # Usage Example
 The following command code will show how to use this package and output m6A methylation regulated expression gene in excel files. The input data for m6Aexpress package includes the INPUT and IP BAM files from MeRIP-seq data. The INPUT BAM files are used to quantify the gene expression under specific context. The IP BAM files with paired INPUT BAM files are used to quantify the methylation intensity for each gene in specific context. m6Aexpress model could detect the correlation between gene expression and methylation and predicated some gene sets, whose gene expression are significantly regulated by methylation in specific context. m6Aexpress can predicate m6A regulated expression gene (m6A-reg-exp) in differential expression and differential methylation context. m6Aexpress can also predicate m6A-re-exp genes in high variable peak context. The high variable peak or high dynamic peak means that peak sites have higher coefficient of variation (CV) of their methylation level across multiple samples, such as sub-tissues, multiple cell lines.
+
 Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context and high dynamic peak context. The following will introduce how to use m6Aexpress package step by step or only on step to obtain significant m6A-reg-exp gene.
 ## Step by Step Analysis
 ### Differential expression and differential methylation context
