@@ -157,9 +157,13 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
 ## On step to predicate m6A-reg-exp gene
 ### In DE-DM context
 > IP\_BAM <- c(f1,f2)
+> 
 > TREATED\_IP\_BAM <- c(f3,f4)
+> 
 > INPUT\_BAM <- c(f5,f6)
+> 
 > TREATED\_INPUT\_BAM <- c(f7,f8)
+> 
 > m6A\_reg\_exp\_gene <- m6Aexpress(express_data=INPUT_BAM, treated_express_data=TREATED_INPUT_BAM, 
 >                                    IP_BAM=IP_BAM, TREATED_IP_BAM=TREATED_IP_BAM, INPUT_BAM=INPUT_BAM, 
 >                                    TREATED_INPUT_BAM=TREATED_INPUT_BAM,annot_type="hg19", GENE_ANNO_GTF=gtf,
@@ -167,7 +171,9 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
 >                                    
 ### In HVP context
 > IP\_BAM <- c(f1,f2,f3,f4)
+> 
 > INPUT\_BAM <- c(f5,f6,f7,f8)
+> 
 > m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, IP_BAM=IP_BAM, INPUT_BAM=INPUT_BAM, 
 >                                annot_type="hg19", GENE_ANNO_GTF=gtf,isGTFAnnotationFile=TRUE, 
 >                                pvalue=0.05,mode="HVP", CV_values = 0.3, num_sample_subgroup=c(2,2))
