@@ -72,7 +72,8 @@ The m6A-express package can be installed by the following R commands:
 The following command code will show how to use this package and output m6A methylation regulated expression gene in excel files. The input data for m6Aexpress package includes the INPUT and IP BAM files from MeRIP-seq data. The INPUT BAM files are used to quantify the gene expression under specific context. The IP BAM files with paired INPUT BAM files are used to quantify the methylation intensity for each gene in specific context. m6Aexpress model could detect the correlation between gene expression and methylation and predicated some gene sets, whose gene expression are significantly regulated by methylation in specific context. m6Aexpress can predicate m6A regulated expression gene (m6A-reg-exp) in differential expression and differential methylation context. m6Aexpress can also predicate m6A-re-exp genes in tissue-specific (multiple sub-groups) context, which considered high dynamic peak or high variable peak sites across sub-tissue and predicate m6A-reg-exp genes with high variable peak.
 Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context and tissue-specific context. The following will introduce how to use m6Aexpress package step by step or only on step to obtain significant m6A-reg-exp gene.
 ## Step by Step Analysis
-### Peak calling for methylation sites in DE-DM context and obtain consisten peak sites
+### Differential expression and differential methylation context
+#### Peak calling for methylation sites in DE-DM context and obtain consisten peak sites
 > f1 <- system.file("extdata", "IP1.bam", package="m6Aexpress")
 
 > f2 <- system.file("extdata", "IP2.bam", package="m6Aexpress")
@@ -101,41 +102,57 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
 > gtf <- system.file("extdata", "hg19toy.gtf", package="m6Aexpress")
  
 > #Obtain the consistent peak sites
-> Get_peak_infor <- Get_peak_sites(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
-### Differential methylation analysis for the consistent peak sites in case-control context
-> DM_sites_infor <- DM_detect(peak_inform=Get_peak_infor,DM_CUTOFF_TYPE="pvalue",num_ctl=2, diff_peak_pvalue=0.05)
-### Calculate the methylation intensity for each gene with DM peak sites
-> gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=TXDB,GENE_ANNO_GTF=NA, species="human")
-### Obtain gene expression for INPUT samples
-> get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM,TREATED\_INPUT\_BAM ), 
+> Get\_peak\_infor <- Get_peak_sites(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+#### Differential methylation analysis for the consistent peak sites in case-control context
+> DM\_sites\_infor <- DM_detect(peak_inform=Get_peak_infor,DM_CUTOFF_TYPE="pvalue",num_ctl=2, diff_peak_pvalue=0.05)
+#### Calculate the methylation intensity for each gene with DM peak sites
+> gene\_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=TXDB,GENE_ANNO_GTF=NA, species="human")
+#### Obtain gene expression for INPUT samples
+> get\_gene\_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM,TREATED\_INPUT\_BAM ), 
                                       isPairedEnd=FALSE,species="human",
                                       GENE_ANNO_GTF = gtf)
-### Detect the differential expression gene
-> obtain_DEgene <- Select_DEgene(gene_count_infor=get_gene_express,
+#### Detect the differential expression gene
+> obtain\_DEgene <- Select_DEgene(gene_count_infor=get_gene_express,
                                cond1="control", 
                                cond2="treated",
                                num_cond1=2, 
                                num_cond2=2,
                                DIFF_GENE_cutoff_FDR=0.05,
                                DE_CUTOFF_TYPE="padj") 
-### Select genes with paired differential expression and differential methylation 
-> expr_methy_gene <- match_expr_methy(gene_expre_infor=obtain_DEgene[[1]], 
+#### Select genes with paired differential expression and differential methylation 
+> expr\_methy\_gene <- match_expr_methy(gene_expre_infor=obtain_DEgene[[1]], 
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
-### Predicate m6A-reg-exp gene by m6Aexpress model in case-control context
-> m6A_Express_model(Input_file=expr_methy_gene,
+#### Predicate m6A-reg-exp gene by m6Aexpress model in case-control context
+> m6A\_Express\_model(Input_file=expr_methy_gene,
                   CUTOFF_TYPE="FDR", 
                   FDR=0.05)
-
-## Basic mode: pooled samples from one or multiple conditions together and identify m6A regulated expression gene in a specific context.
-### Input BAM files.
-
-
-### We use GTF file in the following example.
-> 
-
-### Predict m6A regulated expression gene by m6A-express model
-> m6A_reg\_exp\_gene <- m6Aexpress(express_data=INPUT_BAM, IP_BAM=IP_BAM, INPUT_BAM=INPUT_BAM, annot_type="hg19", GENE_ANNO_GTF=gtf, pvalue=0.05,mode="basic")
+#### Add differential expression and differential methylation information
+> m6A\_express\_addLFC\_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene, 
+                                    DE_gene=DE_gene, methy_distdecay=DM_methy,
+                                    num_cond1=2, OUTPUT_DIR=NA)
+### Tissue-specific context
+#### Peak calling for multiple sub-tissue
+> IP\_BAM <- c(f1,f2,f3,f4)
+> INPUT\_BAM <- c(f5,f6,f7,f8)
+> Get\_peak\_infor <- Get_peak_sites(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+#### Detect high variable peak sites across multiple sub-tissues
+> HVP\_infor <- obtain_HVP_sites(peak_inform=Get_peak_infor,CV_values=0.3,
+                               num_sample_subgroup=c(2,2))
+#### Calculate the methylation intensity for each gene with high variable peak
+> gene\_methyintensity <- gene_methy_intensity(peak_inform=HVP_infor,GENE_ANNO_GTF=gtf, species="human")
+#### Obtain gene expression for INPUT samples in multiple sub-tissues
+> get\_gene\_express <- Get_express_data(INPUT_BAM=c(INPUT\_BAM), 
+                                      isPairedEnd=FALSE,species="human",
+                                      GENE_ANNO_GTF = gtf)
+#### Select genes with paired gene expression and methylation intensity
+> expr\_methy\_gene <- match_expr_methy(gene_expre_infor=get_gene_express, 
+                                     gene_methy_infor=gene_methyintensity,
+                                    OUTPUT_DIR=NA)
+#### Predicate m6A-reg-exp gene by m6Aexpress model in tissue-specific context                                    
+> m6A\_Express\_model(Input_file=expr_methy_gene,
+                     CUTOFF_TYPE="FDR", 
+                      FDR=0.05)
 
 ## DE-DM mode: In this case, we will detect whether the differential m6A methylation peak sites regulated expression that caused the differential expression genes
 ### Predict the differential expression genes are regulated by differential methylation peak sites by m6A-express model
