@@ -5,8 +5,8 @@ m6A-express is a tool to uncover the complex and condition-specific m6A regulati
 The version of current package was supported by R 3.5.3 or new version
 Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
 
-> if (!requireNamespace("BiocManager", quietly = TRUE))
-    install.packages("BiocManager")
+> 'if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")'
 
 > BiocManager::install(c("SummarizedExperiment","Rsamtools",
                       "GenomicAlignments","GenomicRanges","GenomicFeatures",                       
