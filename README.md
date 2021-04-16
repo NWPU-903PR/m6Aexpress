@@ -7,7 +7,8 @@ Firstly, we need to install exomePeak package to do the peak calling for m6A met
 
 > if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
-'''rscript
+
+'''r
 BiocManager::install(c("SummarizedExperiment","Rsamtools",
                       "GenomicAlignments","GenomicRanges","GenomicFeatures",                       
                        "DESeq2","ggplot2","mclust",
