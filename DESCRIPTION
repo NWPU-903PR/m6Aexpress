@@ -1,0 +1,21 @@
+Package: m6Aexpress
+Type: Package
+Title: Predicting context-specific m6A regulation of gene expression
+Version: 0.1.2
+Date: 2021-4-15
+Author: Teng Zhang
+Maintainer: Teng Zhang <tengzhang156@126.com>
+Description: The package is designed to predict the context-specific m6A methylation regulated expression gene
+License: GPL-2
+Encoding: UTF-8
+BuildVignettes: yes
+Depends: exomePeak, QNB, DESeq2, DESeq, reshape2, gdata, reticulate, rtracklayer,stringr, 
+         org.Hs.eg.db, org.Mm.eg.db, Rsubread, TxDb.Hsapiens.UCSC.hg19.knownGene, 
+         TxDb.Mmusculus.UCSC.mm10.knownGene, readr, SummarizedExperiment, aod, 
+          ggplot2, grid, GenomicFeatures, GenomicRanges,AnnotationDbi, 
+          GenomicAlignments,S4Vectors, scales
+Suggests: BiocStyle
+biocViews: Sequencing, Alignment, DataImport,RNASeq,MethylSeq, Transcription, Coverage
+NeedsCompilation: no
+Packaged: 2021-4-15 22:30:05 UTC; bioinfo
+RoxygenNote: 5.0.0
