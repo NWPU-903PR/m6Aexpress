@@ -105,9 +105,9 @@ Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context a
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
 #### Predicate m6A-reg-exp gene by m6Aexpress model in case-control context
-> m6A\_Express\_model(Input_file=expr_methy_gene,
-                  CUTOFF_TYPE="FDR", 
-                  FDR=0.05)
+> m6Aexpress\_result <- m6A_Express_model(Input_file=expr_methy_gene,
+                                           CUTOFF_TYPE="padj", 
+                                            FDR=0.05)
 #### Add differential expression and differential methylation information
 > m6A\_express\_addLFC\_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene, 
                                     DE_gene=DE_gene, methy_distdecay=DM_methy,
