@@ -1,9 +1,5 @@
-# m6A-express: uncovering complex and condition-specific m6A regulation of gene expression
-m6A-express is a tool to uncover the complex and condition-specific m6A regulation of gene expression
-
 # Installation Instructions
-The version of current package was supported by R 3.5.3 or new version
-Firstly, we need to install exomePeak package to do the peak calling for m6A methylation site
+The m6A-express package is supported by R 3.5.3 or newer versions. First, you need to install the exomePeak package for m6A peak calling:
 
 > if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")'
@@ -19,7 +15,7 @@ Firstly, we need to install exomePeak package to do the peak calling for m6A met
     
 > devtools::install_github("ZW-xjtlu/exomePeak")
 
-Then, we installed the QNB package to detect the differential m6A methylation sites.
+Then, please install the QNB package for identifying differential m6A peaks:
 
 > install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
 
@@ -41,15 +37,39 @@ Before install the m6Aexpress package, you should install the following R packag
                          'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
                            'AnnotationDbi'))
                        
-The m6A-express package can be installed by the following R commands:
+Now, the m6A-express package can be installed by the following R commands:
 > devtools::install_github("NWPU-903PR/m6Aexpress")
 
 > library(m6Aexpress)
 
 # Usage Example
-The following command code will show how to use this package and output m6A methylation regulated expression gene in excel files. The input data for m6Aexpress package includes the INPUT and IP BAM files from MeRIP-seq data. The INPUT BAM files are used to quantify the gene expression under specific context. The IP BAM files with paired INPUT BAM files are used to quantify the methylation intensity for each gene in specific context. m6Aexpress model could detect the correlation between gene expression and methylation and predicated some gene sets, whose gene expression are significantly regulated by methylation in specific context. m6Aexpress can predicate m6A regulated expression gene (m6A-reg-exp) in differential expression and differential methylation context. m6Aexpress can also predicate m6A-re-exp genes in high variable peak context. The high variable peak or high dynamic peak means that peak sites have higher coefficient of variation (CV) of their methylation level across multiple samples, such as sub-tissues, multiple cell lines.
+m<sup>6</sup>A-express considers a scenario where transcriptome-wide m6A under different conditions (treated/disease vs control; different tissues/infection stages) are profiled by MeRIP-seq. Note that m6A-express is not restricted to MeRIP-seq but can be applied to any high-throughput methods such as MAZTER-seq or nanopore sequencing that quantify m6A stoichiometry. m6A-express assumes that for an m6A site that regulates mRNA expression, the change of its m6A level is predictive of the change in the expression level of the methylated gene, where the m6A level is quantified by MeRIP-seq IP reads and the expression is measured by MeRIP-seq Input reads. m6A-express is an algorithm designed to assess the degree to which such a predictive relationship exists between m6A levels and gene expressions for the specific conditions under consideration. 
 
-Overall, m6Aexpress can predicate m6A-reg-exp gene set in case-control context and high dynamic peak context. The following will introduce how to use m6Aexpress package step by step or only on step to obtain significant m6A-reg-exp gene.
+Before applying m6A-express, m6A peaks are first
+identified from each MeRIP-seq sample using exomePeak (Figure 1 of
+the paper). The m6A intensity for each gene that
+harbors m6A peaks is computed (Peak Calling and Quantifying
+Subsection). m6A-express then
+selects candidate genes based on the following criteria:  when two conditions (treated vs. control) are
+considered, candidate genes are differential expression genes that harbor
+differential m6A peaks (or DE-DM genes); otherwise, when there are more
+than two conditions (multiple tissue types or time points), candidate genes are
+those that contain highly variable m6A peaks (HVPs). Afterward, m6A-express is
+applied to all the candidate genes. The candidate genes test significant for FDR<0.05 by the Wald test are
+termed m6A-reg-exp genes,
+whose m6A intensities are predicted to regulate their gene
+expressions. Among the outputs of m6A-express are a list of m6A-reg-exp
+genes, their associated regulatory mode and strength (, the
+methylation intensities, and the gene expression levels.  
+
+
+
+The following codes show how to use the m6A-express package to obtain m6A-reg-exp genes genes for two or more
+conditions. . Both step-by-step analysis and one-step prediction are detailed. 
+
+
+
+
 ## Step by Step Analysis
 ### Differential expression and differential methylation context
 #### Peak calling for methylation sites in DE-DM context and obtain consisten peak sites
