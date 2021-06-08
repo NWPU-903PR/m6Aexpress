@@ -4,17 +4,18 @@ The m6A-express package is supported by R 3.5.3 or newer versions. First, you ne
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")'
-```
-> BiocManager::install(c("SummarizedExperiment","Rsamtools",
+
+BiocManager::install(c("SummarizedExperiment","Rsamtools",
                       "GenomicAlignments","GenomicRanges","GenomicFeatures",                       
                        "DESeq2","ggplot2","mclust",
                        "genefilter","BSgenome","BiocParallel",
                       "IRanges","S4Vectors","quantreg",
                        "reshape2","rtracklayer","apeglm"))
 
-> if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
+if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
     
-> devtools::install_github("ZW-xjtlu/exomePeak")
+devtools::install_github("ZW-xjtlu/exomePeak")
+```
 
 Then, please install the QNB package for identifying differential m6A peaks:
 
