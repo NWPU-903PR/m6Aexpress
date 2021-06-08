@@ -57,7 +57,6 @@ m<sup>6</sup>A-reg-exp genes, their associated regulatory mode and strength (β<
 
 The following codes show how to use the *m<sup>6</sup>A-express* package (named m6Aexpress) to obtain m<sup>6</sup>A-reg-exp genes genes for two or more conditions. Both step-by-step analysis and one-step prediction are detailed. 
 
-![](C:\m6A_Express_paper\Version23\m6Aexpress_V23\Figure 1.png)
 
 ## Step by Step Analysis
 ### For two (case-control) conditions
