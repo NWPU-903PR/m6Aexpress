@@ -21,28 +21,24 @@ Then, please install the QNB package for identifying differential m6A peaks:
 install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
 ```
 Installed the reticulate pacakge to call python code in R
-
-> install.packages("reticulate")
-
-> ##install miniconda to install specific python package
->
-> install_miniconda()
-
-> ##install specific python package in R
->
-> py_install("statsmodels"); py_install("pandas); py_install("scipy"); py_install("numpy")
-
+```r
+install.packages("reticulate")
+##install miniconda to install specific python package
+install_miniconda()
+##install specific python package in R
+py_install("statsmodels"); py_install("pandas); py_install("scipy"); py_install("numpy")
+```
 Before install the m6Aexpress package, you should install the following R package:
-
-> BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
+```r
+BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
                          'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
                            'AnnotationDbi'))
-                       
+```                       
 Now, the m6A-express package can be installed by the following R commands:
-> devtools::install_github("NWPU-903PR/m6Aexpress")
-
-> library(m6Aexpress)
-
+```r
+devtools::install_github("NWPU-903PR/m6Aexpress")
+library(m6Aexpress)
+```
 # Usage Example
 *m<sup>6</sup>A-express* considers a scenario where transcriptome-wide m6A under different conditions (treated/disease vs control; different tissues/infection stages) are profiled by MeRIP-seq. Note that m6A-express is not restricted to MeRIP-seq but can be applied to any high-throughput methods such as MAZTER-seq or nanopore sequencing that quantify m6A stoichiometry. m6A-express assumes that for an m6A site that regulates mRNA expression, the change of its m6A level is predictive of the change in the expression level of the methylated gene, where the m6A level is quantified by MeRIP-seq IP reads and the expression is measured by MeRIP-seq Input reads. m6A-express is an algorithm designed to assess the degree to which such a predictive relationship exists between m6A levels and gene expressions for the specific conditions under consideration. 
 
