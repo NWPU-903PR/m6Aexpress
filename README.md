@@ -70,32 +70,32 @@ f5 <- system.file("extdata", "Input1.bam", package="m6Aexpress")
 f6 <- system.file("extdata", "Input2.bam", package="m6Aexpress")
 f7 <- system.file("extdata", "Input3.bam", package="m6Aexpress")
 f8 <- system.file("extdata", "Input4.bam", package="m6Aexpress")
-IP\_BAM <- c(f1,f2)
-INPUT\_BAM <- c(f5,f6)
-TREATED\_IP\_BAM <- c(f3,f4)
-TREATED\_INPUT\_BAM <- c(f7,f8)
+IP_BAM <- c(f1,f2)
+INPUT_BAM <- c(f5,f6)
+TREATED_IP_BAM <- c(f3,f4)
+TREATED_INPUT_BAM <- c(f7,f8)
 #Input the gene annotation file  
 gtf <- system.file("extdata", "hg19toy.gtf", package="m6Aexpress")
 #Obtain the consistent peak sites
-Get\_peak\_infor <- Get_peak_sites(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+Get_peak_infor <- Get_peak_sites(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
 ```
 #### *Calling differential methylated (DM) peaks among the consistent peaks* 
 ```r
-DM\_sites\_infor <- DM_detect(peak_inform=Get_peak_infor,DM_CUTOFF_TYPE="pvalue",num_ctl=2, diff_peak_pvalue=0.05)
+DM_sites_infor <- DM_detect(peak_inform=Get_peak_infor,DM_CUTOFF_TYPE="pvalue",num_ctl=2, diff_peak_pvalue=0.05)
 ```
 #### *Calculate the methylation intensity for each gene with DM peaks*
 ```r
-gene\_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=TXDB,GENE_ANNO_GTF=NA, species="human")
+gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=TXDB,GENE_ANNO_GTF=NA, species="human")
 ```
 #### *Obtain their gene expression for INPUT samples*
 ```r
-get\_gene\_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM,TREATED\_INPUT\_BAM ), 
+get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM,TREATED_INPUT_BAM ), 
                                       isPairedEnd=FALSE,species="human",
                                       GENE_ANNO_GTF = gtf)
 ```                                      
 #### *Identify the differential expression gene*
 ```r
-obtain\_DEgene <- Select_DEgene(gene_count_infor=get_gene_express,
+obtain_DEgene <- Select_DEgene(gene_count_infor=get_gene_express,
                                cond1="control", 
                                cond2="treated",
                                num_cond1=2, 
@@ -105,40 +105,46 @@ obtain\_DEgene <- Select_DEgene(gene_count_infor=get_gene_express,
 ```
 #### *Select genes with both differential expression and differential methylation*
 ```r
-expr\_methy\_gene <- match_expr_methy(gene_expre_infor=obtain_DEgene[[1]], 
+expr_methy_gene <- match_expr_methy(gene_expre_infor=obtain_DEgene[[1]], 
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
 ```                                    
 #### *Predict m6A-reg-exp genes* 
 ```r
-m6Aexpress\_result <- m6A_Express_model(Input_file=expr_methy_gene,
+m6Aexpress_result <- m6A_Express_model(Input_file=expr_methy_gene,
                                            CUTOFF_TYPE="padj", 
                                             FDR=0.05)
 ```                                            
 #### *Add differential expression and differential methylation in the result* 
 ```r
-m6A\_express\_addLFC\_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene, 
+m6A_express_addLFC_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene, 
                                     DE_gene=DE_gene, methy_distdecay=DM_methy,
                                     num_cond1=2, OUTPUT_DIR=NA)
 ```
 ### For more than two conditions
 #### *Peak calling*
 ```r
-IP\_BAM <- c(f1,f2,f3,f4)
-INPUT\_BAM <- c(f5,f6,f7,f8)
-Get\_peak\_infor <- Get_peak_sites(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+IP_BAM <- c(f1,f2,f3,f4)
+INPUT_BAM <- c(f5,f6,f7,f8)
+Get_peak_infor <- Get_peak_sites(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
 ```
-#### Detect high variable peak sites across multiple sub-tissues
-> HVP\_infor <- obtain_HVP_sites(peak_inform=Get_peak_infor,CV_values=0.3,
+#### *Detect highly variable peaks  across multiple conditions*
+```r
+HVP_infor <- obtain_HVP_sites(peak_inform=Get_peak_infor,CV_values=0.3,
                                num_sample_subgroup=c(2,2))
-#### Calculate the methylation intensity for each gene with high variable peak
-> gene\_methyintensity <- gene_methy_intensity(peak_inform=HVP_infor,GENE_ANNO_GTF=gtf, species="human")
-#### Obtain gene expression for INPUT samples in multiple sub-tissues
-> get\_gene\_express <- Get_express_data(INPUT_BAM=c(INPUT\_BAM), 
+```                            
+#### *Calculate the methylation intensity for each gene with highly variable peaks*
+```r
+gene_methyintensity <- gene_methy_intensity(peak_inform=HVP_infor,GENE_ANNO_GTF=gtf, species="human")
+```
+#### *Obtain gene expressions from INPUT samples in each condition*
+```r
+get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM), 
                                       isPairedEnd=FALSE,species="human",
                                       GENE_ANNO_GTF = gtf)
+```                                      
 #### Select genes with paired gene expression and methylation intensity
-> expr\_methy\_gene <- match_expr_methy(gene_expre_infor=get_gene_express, 
+> expr_methy\_gene <- match_expr_methy(gene_expre_infor=get_gene_express, 
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
 #### Predicate m6A-reg-exp gene by m6Aexpress model in tissue-specific context                                    
