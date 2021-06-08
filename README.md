@@ -143,36 +143,36 @@ get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM),
                                       isPairedEnd=FALSE,species="human",
                                       GENE_ANNO_GTF = gtf)
 ```                                      
-#### Select genes with paired gene expression and methylation intensity
-> expr_methy\_gene <- match_expr_methy(gene_expre_infor=get_gene_express, 
+#### *Select genes with expression and methylation intensity of highly variable peaks*
+```r
+expr_methy_gene <- match_expr_methy(gene_expre_infor=get_gene_express, 
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
-#### Predicate m6A-reg-exp gene by m6Aexpress model in tissue-specific context                                    
-> m6A\_Express\_model(Input_file=expr_methy_gene,
+```                                    
+#### *Predicate m6A-reg-exp gene by m6Aexpress model in tissue-specific context* 
+```r
+m6A_Express_model(Input_file=expr_methy_gene,
                      CUTOFF_TYPE="FDR", 
                       FDR=0.05)
-
+```
 ## On step to predicate m6A-reg-exp gene
-### In DE-DM context
-> IP\_BAM <- c(f1,f2)
-> 
-> TREATED\_IP\_BAM <- c(f3,f4)
-> 
-> INPUT\_BAM <- c(f5,f6)
-> 
-> TREATED\_INPUT\_BAM <- c(f7,f8)
-> 
-> m6A\_reg\_exp\_gene <- m6Aexpress(express_data=INPUT_BAM, treated_express_data=TREATED_INPUT_BAM, 
->                                    IP_BAM=IP_BAM, TREATED_IP_BAM=TREATED_IP_BAM, INPUT_BAM=INPUT_BAM, 
->                                    TREATED_INPUT_BAM=TREATED_INPUT_BAM,annot_type="hg19", GENE_ANNO_GTF=gtf,
->                                    isGTFAnnotationFile=TRUE, pvalue=0.05,mode="DE-DM")
->                                    
-### In HVP context
-> IP\_BAM <- c(f1,f2,f3,f4)
-> 
-> INPUT\_BAM <- c(f5,f6,f7,f8)
-> 
-> m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, IP_BAM=IP_BAM, INPUT_BAM=INPUT_BAM, 
->                                annot_type="hg19", GENE_ANNO_GTF=gtf,isGTFAnnotationFile=TRUE, 
->                                pvalue=0.05,mode="HVP", CV_values = 0.3, num_sample_subgroup=c(2,2))
+### For two conditions:
+```r
+IP_BAM <- c(f1,f2)
+TREATED_IP_BAM <- c(f3,f4) 
+INPUT_BAM <- c(f5,f6) 
+TREATED_INPUT_BAM <- c(f7,f8) 
+m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, treated_express_data=TREATED_INPUT_BAM, 
+                                    IP_BAM=IP_BAM, TREATED_IP_BAM=TREATED_IP_BAM, INPUT_BAM=INPUT_BAM, 
+                                    TREATED_INPUT_BAM=TREATED_INPUT_BAM,annot_type="hg19", GENE_ANNO_GTF=gtf,
+                                    isGTFAnnotationFile=TRUE, pvalue=0.05,mode="DE-DM")
+```                                    
+### For more than two conditions
+```r
+IP_BAM <- c(f1,f2,f3,f4)
+INPUT_BAM <- c(f5,f6,f7,f8) 
+m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, IP_BAM=IP_BAM, INPUT_BAM=INPUT_BAM, 
+                                annot_type="hg19", GENE_ANNO_GTF=gtf,isGTFAnnotationFile=TRUE, 
+                                pvalue=0.05,mode="HVP", CV_values = 0.3, num_sample_subgroup=c(2,2))
+```                                
 
