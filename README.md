@@ -40,29 +40,11 @@ devtools::install_github("NWPU-903PR/m6Aexpress")
 library(m6Aexpress)
 ```
 # Usage Example
-*m<sup>6</sup>A-express* considers a scenario where transcriptome-wide m6A under different conditions (treated/disease vs control; different tissues/infection stages) are profiled by MeRIP-seq. Note that m6A-express is not restricted to MeRIP-seq but can be applied to any high-throughput methods such as MAZTER-seq or nanopore sequencing that quantify m6A stoichiometry. m6A-express assumes that for an m6A site that regulates mRNA expression, the change of its m6A level is predictive of the change in the expression level of the methylated gene, where the m6A level is quantified by MeRIP-seq IP reads and the expression is measured by MeRIP-seq Input reads. m6A-express is an algorithm designed to assess the degree to which such a predictive relationship exists between m6A levels and gene expressions for the specific conditions under consideration. 
+*m<sup>6</sup>A-express* considers a scenario where transcriptome-wide m<sup>6</sup>A under different conditions (treated/disease vs control; different tissues/infection stages) are profiled by MeRIP-seq. Note that m6A-express is not restricted to MeRIP-seq but can be applied to any high-throughput methods such as MAZTER-seq or nanopore sequencing that quantify m6A stoichiometry. *m<sup>6</sup>A-express* assumes that for an m<sup>6</sup>A site that regulates mRNA expression, the change of its m<sup>6</sup>A level is predictive of the change in the expression level of the methylated gene, where the m<sup>6</sup>A level is quantified by MeRIP-seq IP reads and the expression is measured by MeRIP-seq Input reads. *m<sup>6</sup>A-express* is an algorithm designed to assess the degree to which such a predictive relationship exists between m<sup>6</sup>A levels and gene expressions for the specific conditions under consideration. 
 
-Before applying m6A-express, m6A peaks are first
-identified from each MeRIP-seq sample using exomePeak (Figure 1 of
-the paper). The m6A intensity for each gene that
-harbors m6A peaks is computed (Peak Calling and Quantifying
-Subsection). m6A-express then
-selects candidate genes based on the following criteria:  when two conditions (treated vs. control) are
-considered, candidate genes are differential expression genes that harbor
-differential m6A peaks (or DE-DM genes); otherwise, when there are more
-than two conditions (multiple tissue types or time points), candidate genes are
-those that contain highly variable m6A peaks (HVPs). Afterward, m6A-express is
-applied to all the candidate genes. The candidate genes test significant for FDR<0.05 by the Wald test are
-termed m6A-reg-exp genes,
-whose m6A intensities are predicted to regulate their gene
-expressions. Among the outputs of m6A-express are a list of m6A-reg-exp
-genes, their associated regulatory mode and strength (, the
-methylation intensities, and the gene expression levels.  
+Before applying *m<sup>6</sup>A-express*, m<sup>6</sup>A peaks are first identified from each MeRIP-seq sample using exomePeak (Figure 1 of the paper). The m6A intensity for each gene that harbors m<sup>6</sup>A peaks is computed (**Peak Calling and Quantifying Subsection**). m<sup>6</sup>A-express then selects candidate genes based on the following criteria: when two conditions (treated vs. control) are considered, candidate genes are differential expression genes that harbor differential m<sup>6</sup>A peaks (or DE-DM genes); otherwise, when there are more than two conditions (multiple tissue types or time points), candidate genes are those that contain highly variable m6A peaks (HVPs). Afterward, *m<sup>6</sup>A-express* is applied to all the candidate genes. The candidate genes test significant for $FDR<0.05$ by the Wald test are termed m<sup>6</sup>A-reg-exp genes, whose m<sup>6</sup>A intensities are predicted to regulate their gene expressions. Among the outputs of *m<sup>6</sup>A-express* are a list of m<sup>6</sup>A-reg-exp genes, their associated regulatory mode and strength (\beta<sub>1</sub>), the methylation intensities, and the gene expression levels.  
 
-
-
-The following codes show how to use the m6A-express package to obtain m6A-reg-exp genes genes for two or more
-conditions. . Both step-by-step analysis and one-step prediction are detailed. 
+The following codes show how to use the *m<sup>6</sup>A-express* package (named m6Aexpress) to obtain m<sup>6</sup>A-reg-exp genes genes for two or more conditions. Both step-by-step analysis and one-step prediction are detailed. 
 
 
 
