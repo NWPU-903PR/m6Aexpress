@@ -2,7 +2,7 @@
 The m6A-express package is supported by R 3.5.3 or newer versions. First, you need to install the exomePeak package for m6A peak calling:
 
 ```r
-> if (!requireNamespace("BiocManager", quietly = TRUE))
+if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")'
 ```
 > BiocManager::install(c("SummarizedExperiment","Rsamtools",
