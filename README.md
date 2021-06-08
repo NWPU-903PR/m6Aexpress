@@ -17,9 +17,9 @@ devtools::install_github("ZW-xjtlu/exomePeak")
 ```
 
 Then, please install the QNB package for identifying differential m6A peaks:
-
-> install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
-
+```r
+install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
+```
 Installed the reticulate pacakge to call python code in R
 
 > install.packages("reticulate")
