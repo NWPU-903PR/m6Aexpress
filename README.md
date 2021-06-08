@@ -47,7 +47,13 @@ level is predictive of the change in the expression level of the methylated gene
 measured by MeRIP-seq Input reads. *m<sup>6</sup>A-express* is an algorithm designed to assess the degree to which such a predictive relationship exists between 
 m<sup>6</sup>A levels and gene expressions for the specific conditions under consideration. 
 
-Before applying *m<sup>6</sup>A-express*, m<sup>6</sup>A peaks are first identified from each MeRIP-seq sample using exomePeak (Figure 1 of the paper). The m6A intensity for each gene that harbors m<sup>6</sup>A peaks is computed (**Peak Calling and Quantifying Subsection**). m<sup>6</sup>A-express then selects candidate genes based on the following criteria: when two conditions (treated vs. control) are considered, candidate genes are differential expression genes that harbor differential m<sup>6</sup>A peaks (or DE-DM genes); otherwise, when there are more than two conditions (multiple tissue types or time points), candidate genes are those that contain highly variable m6A peaks (HVPs). Afterward, *m<sup>6</sup>A-express* is applied to all the candidate genes. The candidate genes test significant for $FDR<0.05$ by the Wald test are termed m<sup>6</sup>A-reg-exp genes, whose m<sup>6</sup>A intensities are predicted to regulate their gene expressions. Among the outputs of *m<sup>6</sup>A-express* are a list of m<sup>6</sup>A-reg-exp genes, their associated regulatory mode and strength (\beta<sub>1</sub>), the methylation intensities, and the gene expression levels.  
+Before applying *m<sup>6</sup>A-express*, m<sup>6</sup>A peaks are first identified from each MeRIP-seq sample using exomePeak (Figure 1 of the paper). The m6A intensity for 
+each gene that harbors m<sup>6</sup>A peaks is computed (**Peak Calling and Quantifying Subsection**). m<sup>6</sup>A-express then selects candidate genes based on the 
+following criteria: when two conditions (treated vs. control) are considered, candidate genes are differential expression genes that harbor differential m<sup>6</sup>A peaks 
+(or DE-DM genes); otherwise, when there are more than two conditions (multiple tissue types or time points), candidate genes are those that contain highly variable m6A peaks 
+(HVPs). Afterward, *m<sup>6</sup>A-express* is applied to all the candidate genes. The candidate genes test significant for $FDR<0.05$ by the Wald test are termed 
+m<sup>6</sup>A-reg-exp genes, whose m<sup>6</sup>A intensities are predicted to regulate their gene expressions. Among the outputs of *m<sup>6</sup>A-express* are a list of 
+m<sup>6</sup>A-reg-exp genes, their associated regulatory mode and strength (\beta<sub>1</sub>), the methylation intensities, and the gene expression levels.  
 
 The following codes show how to use the *m<sup>6</sup>A-express* package (named m6Aexpress) to obtain m<sup>6</sup>A-reg-exp genes genes for two or more conditions. Both step-by-step analysis and one-step prediction are detailed. 
 
