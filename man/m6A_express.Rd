@@ -27,8 +27,10 @@ m6Aexpress(# input files in BAM format
             GENOME = NA,
             UCSC_TABLE_NAME = "knownGene",
             isPairedEnd = FALSE,
-            model="basic",
-
+            mode="DE-DM",
+            CV_values = 0.3,
+            num_sample_subgroup,
+            
             # threshod cutoff
             pvalue=NA,
             FDR=0.05,
@@ -62,12 +64,15 @@ a character vector giving names of treated INPUT samples in MeRIP-seq data, whic
 a character string specifying an in-built annotation used to quantify each gene's reads count for expression data. It has four possible values including \code{"mm10"}, \code{"mm9"}, \code{"hg38"} and \code{"hg19"}, corresponding to the NCBI RefSeq annotations for genomes `mm10', `mm9', `hg38' and `hg19', respectively. \code{"hg19"} by default.
 }
  \item{species}{
-a character string specifying the name of species, which could be \code{"human"}, \code{"mouse"} or \code{"yeast"}. This parameter is only appliable when \code{GENE_ANNO_GTF} is \code{NULL}.
+a character string specifying the name of species, which could be \code{"human"}, \code{"mouse"}. This parameter is only appliable when \code{GENE_ANNO_GTF} is \code{NULL}.
 }
  \item{GENE_ANNO_GTF}{
 A character string giving name of a user-provided annotation file in GTF format. Note that \code{GENE_ANNO_GTF} will override \code{annot_type} if both provided.
 }
  \item{isGTFAnnotationFile}{ logical indicating whether the annotation provided via the \code{annot_type} argument is in GTF format. \code{FALSE} by default. This option is only applicable when \code{GENE_ANNO_GTF} is not \code{NULL}.}
+ \item{mode}{A string, such as \code{"DE-DM"},\code{"HVP"}, which specifies the predicated m6A-reg-exp gene in differential gene and differential methylation (\code{"DE-DM"}) context or high variable peak (\code{"HVP"}) context, default: \code{mode="DE-DM"}.}
+ \item{CV_values}{A decimal number, which is the cutoff for coefficient of variation (CV) used to select high variable peaks. The high variable peaks are defined as CV values are bigger than the cutoff: default \code{CV_values=0.3}.}
+ \item{num_sample_subgroup}{A vector of integer, which specifies the number of samples for each sub-group. For example, \code{num_sample_subgroup=c(2,2,3,1)} means four sub-groups have two samples, two samples, three samples and one sample in each sub-group, respectively.}
  \item{TXDB}{
 An optional TxDb object for gene annotation information used in the analysis, default: NA. Please refere to "GenomicFeatures" package for more details about the "TxDb" object.
 }
@@ -134,7 +139,7 @@ In the \code{DE-DM} mode, m6A-express will output results in specific directory 
 }
 
 \author{
-Teng Zhang <tengzhang156@126.com>
+Teng Zhang <tengzhang126@163.com>
 }
 
 
@@ -144,8 +149,8 @@ Teng Zhang <tengzhang156@126.com>
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 }
 \examples{
-# Basic mode: pooled samples from one or multiple conditions together and identify m6A-reg-exp gene in a specific context.
-# Input BAM files
+\dontrun{
+# Obtain BAM files
 f1 <- system.file("extdata", "IP1.bam", package="m6Aexpress")
 f2 <- system.file("extdata", "IP2.bam", package="m6Aexpress")
 f3 <- system.file("extdata", "IP3.bam", package="m6Aexpress")
@@ -154,28 +159,26 @@ f5 <- system.file("extdata", "Input1.bam", package="m6Aexpress")
 f6 <- system.file("extdata", "Input2.bam", package="m6Aexpress")
 f7 <- system.file("extdata", "Input3.bam", package="m6Aexpress")
 f8 <- system.file("extdata", "Input4.bam", package="m6Aexpress")
-IP_BAM <- c(f1,f2,f3,f4)
-INPUT_BAM <- c(f5,f6,f7,f8)
-
 # Input the annotation file
 gtf <- system.file("extdata", "hg19toy.gtf", package="m6Aexpress")
-
-# Predict m6A-reg-exp gene by m6A-express model
-m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, IP_BAM=IP_BAM, INPUT_BAM=INPUT_BAM, annot_type="hg19", GENE_ANNO_GTF=gtf,isGTFAnnotationFile=TRUE, pvalue=0.05,mode="basic")
-
-# DE-DM mode: Predict the differential methylation peak sites regulated differential expression genes
-## Do not to run the following code because of very little numberic DE-DM genes for the input toy BAM files
-
-\dontrun{
-# Input BAM files
+# In model="DE-DM"
 IP_BAM <- c(f1,f2)
 TREATED_IP_BAM <- c(f3,f4)
 INPUT_BAM <- c(f5,f6)
 TREATED_INPUT_BAM <- c(f7,f8)
-
-# Predict m6A-reg-exp genes out from DE-DM genes
+## Predict m6A-reg-exp genes out from DE-DM genes.
 m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, treated_express_data=TREATED_INPUT_BAM, IP_BAM=IP_BAM, TREATED_IP_BAM=TREATED_IP_BAM, INPUT_BAM=INPUT_BAM, TREATED_INPUT_BAM=TREATED_INPUT_BAM,annot_type="hg19", GENE_ANNO_GTF=gtf,isGTFAnnotationFile=TRUE, pvalue=0.05,mode="DE-DM")
-}}
+}
+\dontrun{
+# In model="HVP"
+IP_BAM <- c(f1,f2,f3,f4)
+INPUT_BAM <- c(f5,f6,f7,f8)
+
+# Predict m6A-reg-exp gene by m6A-express model in "HVP" context
+m6A_reg_exp_gene <- m6Aexpress(express_data=INPUT_BAM, IP_BAM=IP_BAM, INPUT_BAM=INPUT_BAM, annot_type="hg19", GENE_ANNO_GTF=gtf,isGTFAnnotationFile=TRUE, pvalue=0.05,mode="HVP", CV_values = 0.3, num_sample_subgroup=c(2,2))
+}
+
+}
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.
 %\keyword{}

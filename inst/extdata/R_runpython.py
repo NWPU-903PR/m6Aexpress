@@ -63,8 +63,8 @@ def fun_R_call(input_file, size_factor):
         header = np.array(FileIn.readline().strip().split(' '), dtype=str)
     geneIDs = np.loadtxt(fileNameCount, dtype=str, skiprows=1, usecols=(0,))
     geneIDs = geneIDs.reshape(geneIDs.size, 1)
-    idxgene = header[1:((len(header) + 1) / 2)]
-    idxmethy = header[((len(header) + 1) / 2):len(header)]
+    idxgene = header[1:int((len(header) + 1) / 2)]
+    idxmethy = header[int((len(header) + 1) / 2):len(header)]
     idxGene = np.in1d(header, idxgene).nonzero()[0]
     idxMethy = np.in1d(header, idxmethy).nonzero()[0]
     countexpr = np.loadtxt(fileNameCount, dtype=int, skiprows=1, usecols=idxGene)
@@ -91,9 +91,9 @@ def fun_R_call(input_file, size_factor):
         sys.stdout.flush()
 
         if i % 50 == 0:
-            print '\r%i genes finished...' % i ,
+            print ('\r%i genes finished...' % i) ,
         if i+1 == num:
-            print '\r%i genes finished.' % num
+            print ('\r%i genes finished.' % num)
 
         if  sum(responsea[i, :] / librarySizes) >= cntCutoff:
 
@@ -156,6 +156,9 @@ def fun_R_call(input_file, size_factor):
 
                 j += 1
 
+    if(len(np.where(np.isnan(dispRaw))[0])>0):
+        na_num=len(np.where(np.isnan(dispRaw))[0])
+        dispRaw[np.where(np.isnan(dispRaw))]= np.repeat(0.01,na_num)
     Idx = np.where(dispRaw<=2)[0]
     select_dispRaw = dispRaw[Idx]
     countMean = np.mean(countexpr / librarySizes,  axis=1)
@@ -209,9 +212,9 @@ def fun_R_call(input_file, size_factor):
         sys.stdout.flush()
 
         if i % 50 == 0:
-            print '\r%i genes finished...' % i ,
+            print ('\r%i genes finished...' % i) ,
         if i+1 == num:
-            print '\r%i genes finished.' % num
+            print ('\r%i genes finished.' % num)
 
         
         if not np.isnan(dispRaw[i]):
@@ -280,6 +283,9 @@ def fun_R_call(input_file, size_factor):
 
 
     ## Calculate beta value
+    if(len(np.where(np.isnan(dispAdjRna))[0])>0):
+        na_num=len(np.where(np.isnan(dispAdjRna))[0])
+        dispAdjRna[np.where(np.isnan(dispAdjRna))]= np.repeat(0.01,na_num)
     methy_betavalue = np.empty((num, 1))
     methy_betavalue.fill(np.nan)
     const_betavalue = np.empty((num, 1))
@@ -292,10 +298,10 @@ def fun_R_call(input_file, size_factor):
         sys.stdout.flush()
 
         if i % 50 == 0:
-                print '\r%i genes finished...' % i ,
+                print ('\r%i genes finished...' % i) ,
         if i+1 == num:
-                print '\r%i genes finished.' % num
-        if sum(new_countRNA[i, 0:(lenSample/2)] / librarySizes[0:(lenSample/2)]) >= 0 and sum(new_countRNA[i, (lenSample/2):lenSample] / librarySizes[(lenSample/2):lenSample]) >= 0:        
+                print ('\r%i genes finished.' % num)
+        if sum(new_countRNA[i, 0:int(lenSample/2)] / librarySizes[0:int(lenSample/2)]) >= 0 and sum(new_countRNA[i, int(lenSample/2):lenSample] / librarySizes[int(lenSample/2):lenSample]) >= 0:        
            if not np.isnan(dispAdjRna[i]):
                                            response =new_countRNA[i, :]
                                            if np.std(response)!=0:
