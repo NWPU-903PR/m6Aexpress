@@ -6,7 +6,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocMan
    
 BiocManager::install(c("SummarizedExperiment","Rsamtools",
                       "GenomicAlignments","GenomicRanges","GenomicFeatures",                       
-                       "DESeq2","ggplot2","mclust",
+                       "DESeq2","DESeq","ggplot2","mclust",
                        "genefilter","BSgenome","BiocParallel",
                       "IRanges","S4Vectors","quantreg",
                        "reshape2","rtracklayer","apeglm"))
@@ -26,7 +26,7 @@ install.packages("reticulate")
 ##install miniconda to install specific python package
 install_miniconda()
 ##install specific python package in R
-py_install("statsmodels"); py_install("pandas); py_install("scipy"); py_install("numpy")
+py_install("statsmodels"); py_install("pandas"); py_install("scipy"); py_install("numpy")
 ```
 Before install the m6Aexpress package, you should install the following R package:
 ```r
