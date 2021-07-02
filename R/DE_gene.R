@@ -13,7 +13,8 @@ Select_DEgene <- function(gene_count_infor,cond1, cond2,num_cond1, num_cond2,
   keep <- rowSums(counts(dds)) >= 10
   dds <- DESeq(dds)
   dds <- dds[keep,]
-  size_factor <- sizeFactors(dds)
+  ##size_factor <- sizeFactors(dds)
+  size_factor <- gene_count_infor[[2]]
   resLFC <- lfcShrink(dds, coef=2)
   DE_gene <- as.data.frame(resLFC)
 
