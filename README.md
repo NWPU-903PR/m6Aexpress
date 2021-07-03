@@ -27,7 +27,7 @@ install.packages("https://www.bioconductor.org/packages/3.11/bioc/src/contrib/DE
 BiocManager::install('DESeq')
 #BiocManager::install(c( 'DESeq2','org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
                          'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
-                           'AnnotationDbi','aod'))
+                           'AnnotationDbi','aod'))#
 ```                       
 Now, the m6A-express package can be installed by the following R commands:
 ```r
