@@ -2,17 +2,7 @@
 The m6A-express package is supported by R 3.5.3 or newer versions. First, you need to install the exomePeak package for m6A peak calling:
 
 ```r
-if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocManager")
-   
-BiocManager::install(c("SummarizedExperiment","Rsamtools",
-                      "GenomicAlignments","GenomicRanges","GenomicFeatures",                       
-                       "DESeq2","DESeq","ggplot2","mclust",
-                       "genefilter","BSgenome","BiocParallel",
-                      "IRanges","S4Vectors","quantreg",
-                       "reshape2","rtracklayer","apeglm"))
-
 if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
-    
 devtools::install_github("ZW-xjtlu/exomePeak")
 ```
 
@@ -23,15 +13,15 @@ install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.
 Installed the reticulate pacakge to call python code in R
 ```r
 install.packages("reticulate")
-library(reticulate)
 ##install miniconda to install specific python package
-install_miniconda()
+reticulate::install_miniconda()
 ##install specific python package in R
 py_install("statsmodels"); py_install("pandas"); py_install("scipy"); py_install("numpy")
 ```
 Before install the m6Aexpress package, you should install the following R package:
 ```r
-BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
+if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocManager")
+BiocManager::install(c( 'DESeq2','DESeq','org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
                          'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
                            'AnnotationDbi'))
 ```                       
