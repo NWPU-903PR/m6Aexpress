@@ -2,6 +2,15 @@
 The m6A-express package is supported by R 3.5.3 or newer versions. First, you need to install the exomePeak package for m6A peak calling:
 
 ```r
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
+
+BiocManager::install(c("SummarizedExperiment","cqn","Rsamtools",
+                       "GenomicAlignments","GenomicRanges","GenomicFeatures",
+                       "DESeq2","ggplot2","mclust",
+                       "genefilter","BSgenome","BiocParallel",
+                       "IRanges","S4Vectors","quantreg",
+                       "reshape2","rtracklayer","apeglm","RMariaDB"))
 if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
 devtools::install_github("ZW-xjtlu/exomePeak")
 ```
