@@ -5,18 +5,15 @@ The m6A-express package is supported by R 3.5.3 or newer versions. First, you ne
 if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
-BiocManager::install(c("SummarizedExperiment","cqn","Rsamtools",
-                       "GenomicAlignments","GenomicRanges","GenomicFeatures",
-                       "DESeq2","ggplot2","mclust",
-                       "genefilter","BSgenome","BiocParallel",
-                       "IRanges","S4Vectors","quantreg",
-                       "reshape2","rtracklayer","apeglm","RMariaDB"))
-if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
-devtools::install_github("ZW-xjtlu/exomePeak")
+BiocManager::install(c("Rsamtools","GenomicAlignments","GenomicRanges",
+                       "GenomicFeatures","rtracklayer","DESeq2"))
+                       
+install.packages("https://www.bioconductor.org/packages/3.8/bioc/src/contrib/exomePeak_2.16.0.tar.gz", repos = NULL, type="source")
 ```
 
 Then, please install the QNB package for identifying differential m6A peaks:
 ```r
+install.packages("locfit")
 install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
 ```
 Installed the reticulate pacakge to call python code in R
