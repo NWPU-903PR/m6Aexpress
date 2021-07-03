@@ -23,7 +23,7 @@ Before install the m6Aexpress package, you should install the following R packag
 if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocManager")
 ##If the R version is higher than 4.0 (R>=4.1), the DESeq package should be installed by
 install.packages("https://www.bioconductor.org/packages/3.11/bioc/src/contrib/DESeq_1.39.0.tar.gz", repos = NULL, type="source")
-##If the R version R>=3.5, the DESeq package should be installed by
+##If the R version R>=3.5.3, the DESeq package should be installed by
 BiocManager::install('DESeq')
 #BiocManager::install(c( 'DESeq2','org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
                          'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
