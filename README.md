@@ -23,6 +23,7 @@ install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.
 Installed the reticulate pacakge to call python code in R
 ```r
 install.packages("reticulate")
+library(reticulate)
 ##install miniconda to install specific python package
 install_miniconda()
 ##install specific python package in R
