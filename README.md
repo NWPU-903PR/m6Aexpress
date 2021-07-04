@@ -28,8 +28,11 @@ py_install("statsmodels"); py_install("pandas"); py_install("scipy"); py_install
 Before install the m6Aexpress package, you should install the following R package:
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocManager")
-##If the R version R>=4.1, the DESeq package should be installed by
+##If the R version R>=4.0, the DESeq package should be installed by
+##for Linux installation
 install.packages("https://www.bioconductor.org/packages/3.11/bioc/src/contrib/DESeq_1.39.0.tar.gz", repos = NULL, type="source")
+##for Windows installation
+install.packages("https://www.bioconductor.org/packages/3.11/bioc/bin/windows/contrib/4.0/DESeq_1.39.0.zip", repos = NULL, type="source")
 ##If the R version R>=3.5.3, the DESeq package should be installed by
 BiocManager::install('DESeq')
 ##Install some annotation packages
