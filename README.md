@@ -2,37 +2,42 @@
 The m6A-express package is supported by R 3.5.3 or newer versions. First, you need to install the exomePeak package for m6A peak calling:
 
 ```r
-if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocManager")
-   
-BiocManager::install(c("SummarizedExperiment","Rsamtools",
-                      "GenomicAlignments","GenomicRanges","GenomicFeatures",                       
-                       "DESeq2","ggplot2","mclust",
-                       "genefilter","BSgenome","BiocParallel",
-                      "IRanges","S4Vectors","quantreg",
-                       "reshape2","rtracklayer","apeglm"))
+if (!requireNamespace("BiocManager", quietly = TRUE))
+    install.packages("BiocManager")
 
-if (!requireNamespace("devtools", quietly = TRUE)) install.packages("devtools")
-    
-devtools::install_github("ZW-xjtlu/exomePeak")
+BiocManager::install(c("Rsamtools","GenomicAlignments","GenomicRanges",
+                       "GenomicFeatures","rtracklayer","DESeq2"))
+                       
+install.packages("https://www.bioconductor.org/packages/3.8/bioc/src/contrib/exomePeak_2.16.0.tar.gz", repos = NULL, type="source")
 ```
 
 Then, please install the QNB package for identifying differential m6A peaks:
 ```r
+install.packages("locfit")
 install.packages("https://cran.r-project.org/src/contrib/Archive/QNB/QNB_1.1.11.tar.gz", repos = NULL, type="source")
 ```
 Installed the reticulate pacakge to call python code in R
 ```r
 install.packages("reticulate")
 ##install miniconda to install specific python package
+library(reticulate)
 install_miniconda()
 ##install specific python package in R
-py_install("statsmodels"); py_install("pandas); py_install("scipy"); py_install("numpy")
+py_install("statsmodels"); py_install("pandas"); py_install("scipy"); py_install("numpy")
 ```
 Before install the m6Aexpress package, you should install the following R package:
 ```r
-BiocManager::install(c('org.Hs.eg.db','org.Mm.eg.db','Rsubread', 
-                         'TxDb.Hsapiens.UCSC.hg19.knownGene','TxDb.Mmusculus.UCSC.mm10.knownGene',
-                           'AnnotationDbi'))
+if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocManager")
+##If the R version R>=4.0, the DESeq package should be installed by
+##for Linux installation
+install.packages("https://www.bioconductor.org/packages/3.11/bioc/src/contrib/DESeq_1.39.0.tar.gz", repos = NULL, type="source")
+##for Windows installation
+install.packages("https://www.bioconductor.org/packages/3.11/bioc/bin/windows/contrib/4.0/DESeq_1.39.0.zip", repos = NULL, type="source")
+##If the R version R>=3.5.3, the DESeq package should be installed by
+BiocManager::install('DESeq')
+##Install some annotation packages
+BiocManager::install(c('org.Hs.eg.db', 'org.Mm.eg.db', 'TxDb.Hsapiens.UCSC.hg19.knownGene', 
+                       'TxDb.Mmusculus.UCSC.mm10.knownGene','AnnotationDbi'))
 ```                       
 Now, the m6A-express package can be installed by the following R commands:
 ```r
