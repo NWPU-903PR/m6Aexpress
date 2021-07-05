@@ -41,6 +41,8 @@ BiocManager::install(c('org.Hs.eg.db', 'org.Mm.eg.db', 'TxDb.Hsapiens.UCSC.hg19.
 ```                       
 Now, the m6A-express package can be installed by the following R commands:
 ```r
+if (!requireNamespace("devtools", quietly = TRUE))
+    install.packages("devtools")
 devtools::install_github("NWPU-903PR/m6Aexpress")
 library(m6Aexpress)
 ```
