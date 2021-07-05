@@ -25,7 +25,7 @@ install_miniconda()
 ##install specific python package in R
 py_install("statsmodels"); py_install("pandas"); py_install("scipy"); py_install("numpy")
 ```
-Before install the m6Aexpress package, you should install the following R package:
+Before installing the m6Aexpress package, you should install the following R package:
 ```r
 if (!requireNamespace("BiocManager", quietly = TRUE))  install.packages("BiocManager")
 ##If the R version R>=4.0, the DESeq package should be installed by
