@@ -20,7 +20,7 @@ Select_DEgene <- function(gene_count_infor,cond1, cond2,num_cond1, num_cond2,
 
   if (DE_CUTOFF_TYPE =="padj") {sig_DEgene <- DE_gene[(DE_gene$padj<DIFF_GENE_cutoff_FDR),]}
   if (DE_CUTOFF_TYPE =="pvalue") {sig_DEgene <- DE_gene[(DE_gene$pvalue<DIFF_GENE_CUTOFF_PVALUE),]}
-
+  sig_DEgene <- na.omit(sig_DEgene)
   DE_gene_count <- gene_count[which(!is.na(match(rownames(gene_count), rownames(sig_DEgene)))),]
   DE_result <- list(DE_gene_count,size_factor,sig_DEgene)
   return(DE_result)
