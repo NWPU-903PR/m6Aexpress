@@ -92,13 +92,13 @@ DM_sites_infor <- DM_detect(peak_inform=Get_peak_infor,DM_CUTOFF_TYPE="pvalue",n
 ```
 #### *Calculate the methylation intensity for each gene with DM peaks*
 ```r
-gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=TXDB,GENE_ANNO_GTF=NA, species="human")
+gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=NA,GENE_ANNO_GTF=gtf, species="human")
 ```
 #### *Obtain their gene expression for INPUT samples*
 ```r
 get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM,TREATED_INPUT_BAM ), 
                                       isPairedEnd=FALSE,species="human",
-                                      GENE_ANNO_GTF = gtf)
+                                      GENE_ANNO_GTF = gtf,isGTFAnnotationFile=TRUE)
 ```                                      
 #### *Identify the differential expression gene*
 ```r
