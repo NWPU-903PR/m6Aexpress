@@ -76,7 +76,7 @@
     op <- options(warn = (-1))
     txdb <- makeTxDbFromGFF(GENE_ANNO_GTF, format = "gtf")
     options(op)
-    CDS <- cdsBy(txdb, by="tx",use.names=TRUE)
+    CDS <- cdsBy(txdb, by="gene",use.names=FALSE)
     stop_codon <- resize(CDS,3,fix = "end")
     select_gene_methy_GR <- gene_methy_GR[which(!is.na(match(names(gene_methy_GR),names(stop_codon))))]
     select_stopcodon <- stop_codon[which(!is.na(match(names(stop_codon),names(gene_methy_GR))))]
