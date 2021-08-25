@@ -4,9 +4,14 @@ m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir){
   fileNameCount=Input_file[[1]]
   librarySizes=as.numeric(Input_file[[2]])
   out_result <- suppressMessages(try(fun_R_call(fileNameCount, librarySizes),silent=TRUE))
-  while(is.null(nrow(out_result))){
+  j=0
+  while((is.null(nrow(out_result)))&j<10){
     out_result <- suppressMessages(try(fun_R_call(fileNameCount, librarySizes),silent=TRUE))
+    j <- j+1
   }
+  if(j==10){
+    print("There is no significant m6A regulated expression gene")
+    }
   genecoutmethy <-read.table(fileNameCount,header = T)
   size_factor<-librarySizes
   exprmethyre <- out_result
