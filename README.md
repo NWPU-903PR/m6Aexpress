@@ -112,7 +112,7 @@ obtain_DEgene <- Select_DEgene(gene_count_infor=get_gene_express,
 ```
 #### *Select genes with both differential expression and differential methylation*
 ```r
-expr_methy_gene <- match_expr_methy(gene_expre_infor=obtain_DEgene, 
+expr_methy_gene <- match_expr_methy(gene_count_infor=obtain_DEgene, 
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
 ```                                    
@@ -152,7 +152,7 @@ get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM),
 ```                                      
 #### *Select genes with expression and methylation intensity of highly variable peaks*
 ```r
-expr_methy_gene <- match_expr_methy(gene_expre_infor=get_gene_express, 
+expr_methy_gene <- match_expr_methy(gene_count_infor=get_gene_express, 
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
 ```                                    
