@@ -26,7 +26,7 @@
 
 ##peak methy-level distance decay
 ##caculate all differential methylation peak site normalize dist decay methy level
-peakmethyleveldecay <- function(peak_inform,txdbinfor, GENE_ANNO_GTF, species="human"){
+gene_methy_intensity <- function(peak_inform,txdbinfor, GENE_ANNO_GTF, species="human"){
   ## caculate the site distance to stop codon
 
   peak_infor <- peak_inform[[1]]
