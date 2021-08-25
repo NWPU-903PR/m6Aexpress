@@ -15,7 +15,7 @@ match_expr_methy(gene_count_infor,
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{gene_count_infor}{
-A dataframe with the reads count in each gene for each sample.
+A list data format, which includes a dataframe quantified the gene expression with reads count for each gene in each sample under specific context and a vector of size factor to normalize gene expression of INPUT samples in the furture. If the input data are the differential expression gene, it included the reads count of each DE gene, normalized size factor for Input sample and the differential expression information. 
 }
   \item{gene_methy_infor}{
 A dataframe with the methylation intensity for each gene of each sample.
