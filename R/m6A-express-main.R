@@ -25,7 +25,7 @@ m6Aexpress <- function(express_data, treated_express_data=character(0),
   if(model=="basic"){
     ##methylation intensity
     print("Calculate methylation intensity for each gene. It may spend some minutes.")
-    gene_methyintensity <- peakmethyleveldecay(peak_inform=get_peak_site,txdbinfor=TXDB,GENE_ANNO_GTF=GENE_ANNO_GTF, species=species)
+    gene_methyintensity <- gene_methy_intensity(peak_inform=get_peak_site,txdbinfor=TXDB,GENE_ANNO_GTF=GENE_ANNO_GTF, species=species)
 
     ##match expression and methylation intensity
     print("Obtain methylation regulated expression gene by m6A-express model")
@@ -54,11 +54,11 @@ m6Aexpress <- function(express_data, treated_express_data=character(0),
     DM_methy <- DM_detect(peak_inform=get_peak_site,DM_CUTOFF_TYPE=DM_CUTOFF_TYPE,num_ctl=num_ctl,
                           diff_peak_fdr=diff_peak_fdr,diff_peak_pvalue=diff_peak_pvalue)
     print("Calculate methylation intensity for differential methylation gene. It may spend some minutes.")
-    gene_methyintensity <- peakmethyleveldecay(peak_inform=DM_methy,txdbinfor=TXDB,GENE_ANNO_GTF=GENE_ANNO_GTF, species=species)
+    gene_methyintensity <- gene_methy_intensity(peak_inform=DM_methy,txdbinfor=TXDB,GENE_ANNO_GTF=GENE_ANNO_GTF, species=species)
 
     ##match expression and methylation intensity
     print("Identify differential expression gene are regulated by differential methylation peak.")
-    paired_expr_methy <- match_expr_methy(gene_count_infor=DE_gene, decay_methy=gene_methyintensity,OUTPUT_DIR=OUTPUT_DIR)
+    paired_expr_methy <- match_expr_methy(gene_count_infor=DE_gene, gene_methy_infor=gene_methyintensity,OUTPUT_DIR=OUTPUT_DIR)
     if (is.na(pvalue)) {CUTOFF_TYPE="padj"} else  {CUTOFF_TYPE="pvalue"}
     m6Areg_expr_gene <- m6A_express_model(Input_file=paired_expr_methy,CUTOFF_TYPE=CUTOFF_TYPE,pvalue=pvalue,
                                           FDR=FDR, out_dir=OUTPUT_DIR)
