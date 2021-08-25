@@ -37,5 +37,6 @@ match_expr_methy <- function(gene_count_infor, gene_methy_infor,OUTPUT_DIR){
   write.table(match_data, file = paste0(OUTPUT_DIR,"/m6Aexpress_result/","expr_methy.tab"), quote = FALSE, row.names = FALSE)
   out_putfile <- paste0(OUTPUT_DIR,"/m6Aexpress_result/","expr_methy.tab")
   m6A_express_input <- list(out_putfile,size_factor)
+  names(m6A_express_input) <- c("gene_express_methy_dir","size_factor")
   return(m6A_express_input)
 }
