@@ -24,8 +24,8 @@
 }
 obtain_HVP_sites <- function(peak_inform,CV_values=0.3,num_sample_subgroup){
   ## caculate the site distance to stop codon
-  peak_infor <- peakinfor_data[[1]]
-  size_factor <- peakinfor_data[[2]]
+  peak_infor <- peak_inform[[1]]
+  size_factor <- peak_inform[[2]]
   norm_methy_level <- .methy_level(IP_Input_read=peak_infor,size_factor=size_factor)
   methy_level<- norm_methy_level[,-c(1:6)]
   subgroup_methy <- data.frame()
