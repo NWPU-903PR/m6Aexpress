@@ -1,5 +1,5 @@
-\name{Get_peak_sites}
-\alias{Get_peak_sites}
+\name{Get_peakinfor}
+\alias{Get_peakinfor}
 %- Also NEED an '\alias' for EACH other topic documented here.
 \title{
 Peak calling by exomePeak
@@ -8,7 +8,7 @@ Peak calling by exomePeak
 Peak calling and obtain the reads count for each m6A site using \code{exomePeak} R package.
 }
 \usage{
-Get_peak_sites(IP_BAM, 
+Get_peakinfor(IP_BAM, 
                INPUT_BAM,
                TREATED_IP_BAM=character(0),
                TREATED_INPUT_BAM=character(0), 
@@ -91,7 +91,7 @@ INPUT_BAM <- c(f5,f6,f7,f8)
 # Input the annotation file
 gtf <- system.file("extdata", "hg19toy.gtf", package="m6Aexpress")
 # Get peak sites information
-Get_peak_infor <- Get_peak_sites(IP_BAM, INPUT_BAM,GENE_ANNO_GTF=gtf)
+Get_peak_infor <- Get_peakinfor(IP_BAM, INPUT_BAM,GENE_ANNO_GTF=gtf)
 }
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
