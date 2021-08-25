@@ -1,4 +1,6 @@
-##Obtain High Variable Peak
+obtain_HVP_sites <- function(peak_inform,CV_values=0.3,num_sample_subgroup){
+  ## caculate the site distance to stop codon
+  ##Obtain High Variable Peak
 .methy_level <-  function(IP_Input_read,size_factor){
   ##get methy level
   IP_site_read <- IP_Input_read[,grep("IP",colnames(IP_Input_read))]
@@ -22,8 +24,6 @@
   }
   return(methy_level_infor)
 }
-obtain_HVP_sites <- function(peak_inform,CV_values=0.3,num_sample_subgroup){
-  ## caculate the site distance to stop codon
   peak_infor <- peak_inform[[1]]
   size_factor <- peak_inform[[2]]
   norm_methy_level <- .methy_level(IP_Input_read=peak_infor,size_factor=size_factor)
