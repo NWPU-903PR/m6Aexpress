@@ -6,7 +6,7 @@ if (!requireNamespace("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 
 BiocManager::install(c("Rsamtools","GenomicAlignments","GenomicRanges",
-                       "GenomicFeatures","rtracklayer","DESeq2"))
+                       "GenomicFeatures","rtracklayer","DESeq2","apeglm","RMariaDB"))
                        
 install.packages("https://www.bioconductor.org/packages/3.8/bioc/src/contrib/exomePeak_2.16.0.tar.gz", repos = NULL, type="source")
 ```
