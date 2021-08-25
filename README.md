@@ -84,7 +84,7 @@ TREATED_INPUT_BAM <- c(f7,f8)
 #Input the gene annotation file  
 gtf <- system.file("extdata", "hg19toy.gtf", package="m6Aexpress")
 #Obtain the consistent peak sites
-Get_peak_infor <- Get_peak_sites(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+Get_peak_infor <- Get_peakinfor(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
 ```
 #### *Calling differential methylated (DM) peaks among the consistent peaks* 
 ```r
