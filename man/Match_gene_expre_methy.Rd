@@ -8,13 +8,13 @@ Match gene expression and methylation
 Match gene expression and methylation intensity
 }
 \usage{
-match_expr_methy(gene_expre_infor, 
+match_expr_methy(gene_count_infor, 
                  gene_methy_infor,
                  OUTPUT_DIR)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{gene_expre_infor}{
+  \item{gene_count_infor}{
 A dataframe with the reads count in each gene for each sample.
 }
   \item{gene_methy_infor}{
@@ -57,7 +57,7 @@ gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,
                                             GENE_ANNO_GTF=NA, 
                                             species="human")
 ##match gene expression of DE gene and methylation intensity of DM gene
-expr_methy_gene <- match_expr_methy(gene_expre_infor=obtain_DEgene[[1]], 
+expr_methy_gene <- match_expr_methy(gene_count_infor=obtain_DEgene, 
                                      gene_methy_infor=gene_methyintensity,
                                     OUTPUT_DIR=NA)
 ##In high variable peak sites context
@@ -77,7 +77,7 @@ gene_methyintensity <- gene_methy_intensity(peak_inform=HVP_infor,
                                             GENE_ANNO_GTF=NA, 
                                             species="human")
 ##match gene expression and methylation intensity of HVP gene
-expr_methy_gene <- match_expr_methy(gene_expre_infor=get_gene_express[[1]], 
+expr_methy_gene <- match_expr_methy(gene_count_infor=get_gene_express, 
                                     gene_methy_infor=gene_methyintensity,
                                      OUTPUT_DIR=NA)
 
