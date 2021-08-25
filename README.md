@@ -133,7 +133,7 @@ m6A_express_addLFC_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene,
 ```r
 IP_BAM <- c(f1,f2,f3,f4)
 INPUT_BAM <- c(f5,f6,f7,f8)
-Get_peak_infor <- Get_peak_sites(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+Get_peak_infor <- Get_peakinfor(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
 ```
 #### *Detect highly variable peaks  across multiple conditions*
 ```r
