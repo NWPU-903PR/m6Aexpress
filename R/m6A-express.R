@@ -12,7 +12,8 @@ m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir){
   if(j==10){
     print("There is no significant m6A regulated expression gene")
     }
-  genecoutmethy <-read.table(fileNameCount,header = T)
+  if(j<10){
+    genecoutmethy <-read.table(fileNameCount,header = T)
   size_factor<-librarySizes
   exprmethyre <- out_result
   match_count_methy <- data.frame()
@@ -114,7 +115,8 @@ m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir){
     write.table(select_adjbeta,file=paste(out_dir,"m6Aexpress_result", "m6A-express_result.xls",sep="/"), sep="\t",row.names =FALSE,quote = FALSE)
 
     }
+   return(select_adjbeta)
+  }
 
- return(select_adjbeta)
 }
 
