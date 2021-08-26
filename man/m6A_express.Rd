@@ -135,6 +135,16 @@ In the \code{DE-DM} mode, m6A-express will output results in specific directory 
 
 5. The predicting m6A methylation regulated expression (m6A-reg-exp) genes out from DE-DM genes under given cut-off (e.g. \code{pvalue=0.05} or \code{FDR=0.05}) in .XLS (tab-delimited) format file. The .XLS file includes five columns: the name of m6A-reg-exp gene, Beta0, Beta1, pvalue and FDR.
 
+In the \code{HVP} mode, m6A-express will output results in specific directory including:
+
+1. Consistent peak sites information across multiple conditions obtained by \code{exomePeak} R-package, which are detailedly explained in \code{exomePeak} R-package.
+
+2. The High varialbe peak sites information as .xlsx data format.
+
+3. The paired reads count and methylation intensity for each differential expression gene with high variable peaks (HVP) in tab-delimited text file.
+
+4. The predicting m6A methylation regulated expression (m6A-reg-exp) genes out from HVP genes under given cut-off (e.g. \code{pvalue=0.05} or \code{FDR=0.05}) in .XLS (tab-delimited) format file. The .XLS file includes five columns: the name of m6A-reg-exp gene, Beta0, Beta1, pvalue and FDR.
+
 
 }
 
