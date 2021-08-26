@@ -29,7 +29,7 @@ m6Aexpress <- function(express_data, treated_express_data=character(0),
 
     ##match expression and methylation intensity
     print("Obtain methylation regulated expression gene by m6A-express model")
-    paired_expr_methy <- match_expr_methy(gene_count_infor=gene_express_data, decay_methy=gene_methyintensity,OUTPUT_DIR=OUTPUT_DIR)
+    paired_expr_methy <- match_expr_methy(gene_count_infor=gene_express_data, gene_methy_infor=gene_methyintensity,OUTPUT_DIR=OUTPUT_DIR)
     if (is.na(pvalue)) {CUTOFF_TYPE="padj"} else  {CUTOFF_TYPE="pvalue"}
     m6Areg_expr_gene <- m6A_Express_model(Input_file=paired_expr_methy,CUTOFF_TYPE=CUTOFF_TYPE,pvalue=pvalue,
                                           FDR=FDR, out_dir=OUTPUT_DIR)
