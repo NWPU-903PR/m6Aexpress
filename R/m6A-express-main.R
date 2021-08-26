@@ -6,6 +6,8 @@ m6Aexpress <- function(express_data, treated_express_data=character(0),
                         GENOME = NA, UCSC_TABLE_NAME = "knownGene", model="basic",
                         pvalue=NA,
                         FDR=0.05,
+                        CV_values=0.3,
+                        num_sample_subgroup,
                         diff_gene_pvalue=NA,
                         diff_gene_fdr=0.05,
                         diff_peak_pvalue=NA,
@@ -26,6 +28,21 @@ m6Aexpress <- function(express_data, treated_express_data=character(0),
     ##methylation intensity
     print("Calculate methylation intensity for each gene. It may spend some minutes.")
     gene_methyintensity <- gene_methy_intensity(peak_inform=get_peak_site,txdbinfor=TXDB,GENE_ANNO_GTF=GENE_ANNO_GTF, species=species)
+
+    ##match expression and methylation intensity
+    print("Obtain methylation regulated expression gene by m6A-express model")
+    paired_expr_methy <- match_expr_methy(gene_count_infor=gene_express_data, gene_methy_infor=gene_methyintensity,OUTPUT_DIR=OUTPUT_DIR)
+    if (is.na(pvalue)) {CUTOFF_TYPE="padj"} else  {CUTOFF_TYPE="pvalue"}
+    m6Areg_expr_gene <- m6A_Express_model(Input_file=paired_expr_methy,CUTOFF_TYPE=CUTOFF_TYPE,pvalue=pvalue,
+                                          FDR=FDR, out_dir=OUTPUT_DIR)
+    return(m6Areg_expr_gene)
+  }
+    if(model=="HVP"){
+     ###obtain the high variable Peak sites
+     get_HVP_peak <- obtain_HVP_sites(peak_inform=get_peak_site,CV_values=0.3,num_sample_subgroup=num_sample_subgroup)
+    ##methylation intensity
+    print("Calculate methylation intensity for each gene with high variable peak. It may spend some minutes.")
+    gene_methyintensity <- gene_methy_intensity(peak_inform=get_HVP_peak,txdbinfor=TXDB,GENE_ANNO_GTF=GENE_ANNO_GTF, species=species)
 
     ##match expression and methylation intensity
     print("Obtain methylation regulated expression gene by m6A-express model")
