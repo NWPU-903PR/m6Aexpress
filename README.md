@@ -84,7 +84,7 @@ TREATED_INPUT_BAM <- c(f7,f8)
 #Input the gene annotation file  
 gtf <- system.file("extdata", "hg19toy.gtf", package="m6Aexpress")
 #Obtain the consistent peak sites
-Get_peak_infor <- Get_peakinfor(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+Get_peak_infor <- Get_peakinfor(IP_BAM, INPUT_BAM,TREATED_IP_BAM, TREATED_INPUT_BAM, GENE_ANNO_GTF=gtf)
 ```
 #### *Calling differential methylated (DM) peaks among the consistent peaks* 
 ```r
@@ -92,7 +92,7 @@ DM_sites_infor <- DM_detect(peak_inform=Get_peak_infor,DM_CUTOFF_TYPE="pvalue",n
 ```
 #### *Calculate the methylation intensity for each gene with DM peaks*
 ```r
-gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=NA,GENE_ANNO_GTF=gtf, species="human")
+gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor=NA,GENE_ANNO_GTF=gtf)
 ```
 #### *Obtain their gene expression for INPUT samples*
 ```r
@@ -133,7 +133,7 @@ m6A_express_addLFC_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene,
 ```r
 IP_BAM <- c(f1,f2,f3,f4)
 INPUT_BAM <- c(f5,f6,f7,f8)
-Get_peak_infor <- Get_peakinfor(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf, species="human")
+Get_peak_infor <- Get_peakinfor(IP_BAM, INPUT_BAM, GENE_ANNO_GTF=gtf)
 ```
 #### *Detect highly variable peaks  across multiple conditions*
 ```r
@@ -142,12 +142,12 @@ HVP_infor <- obtain_HVP_sites(peak_inform=Get_peak_infor,CV_values=0.3,
 ```                            
 #### *Calculate the methylation intensity for each gene with highly variable peaks*
 ```r
-gene_methyintensity <- gene_methy_intensity(peak_inform=HVP_infor,GENE_ANNO_GTF=gtf, species="human")
+gene_methyintensity <- gene_methy_intensity(peak_inform=HVP_infor,GENE_ANNO_GTF=gtf)
 ```
 #### *Obtain gene expressions from INPUT samples in each condition*
 ```r
 get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM), 
-                                      isPairedEnd=FALSE,species="human",
+                                      isPairedEnd=FALSE,
                                       GENE_ANNO_GTF = gtf)
 ```                                      
 #### *Select genes with expression and methylation intensity of highly variable peaks*
