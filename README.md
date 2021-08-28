@@ -97,8 +97,7 @@ gene_methyintensity <- gene_methy_intensity(peak_inform=DM_sites_infor,txdbinfor
 #### *Obtain their gene expression for INPUT samples*
 ```r
 get_gene_express <- Get_express_data(INPUT_BAM=c(INPUT_BAM,TREATED_INPUT_BAM ), 
-                                      isPairedEnd=FALSE,species="human",
-                                      GENE_ANNO_GTF = gtf,isGTFAnnotationFile=TRUE)
+                                      isPairedEnd=FALSE,GENE_ANNO_GTF = gtf,isGTFAnnotationFile=TRUE)
 ```                                      
 #### *Identify the differential expression gene*
 ```r
