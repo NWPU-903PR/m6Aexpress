@@ -25,5 +25,6 @@ DM_detect <- function(peak_inform,DM_CUTOFF_TYPE,num_ctl,
   if (DM_CUTOFF_TYPE =="pvalue") {select_DMpeak_site <- QNB_test[which((QNB_test$pvalue<diff_peak_pvalue)==TRUE),]}
   select_DMpeak <- list(select_DMpeak_site, size_factor)
   DM_peak_infor <- select_DMpeak_site[,c(1:4,6,(ncol(select_DMpeak_site)-1):(ncol(select_DMpeak_site)-2))]
+  names(select_DMpeak) <- c("DM_peak_infor", "library_sizefactor")
   return(select_DMpeak)
 }
