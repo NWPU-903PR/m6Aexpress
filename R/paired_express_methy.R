@@ -1,5 +1,5 @@
 ##match gene count and methylation intensity
-match_expr_methy <- function(gene_count_infor, gene_methy_infor,OUTPUT_DIR){
+match_expr_methy <- function(gene_count_infor, gene_methy_infor,OUTPUT_DIR=NA){
   ##select DE gene data
   gene_count <- gene_count_infor[[1]]
   gene_count <- gene_count[which(rowSums(gene_count)>10),]
