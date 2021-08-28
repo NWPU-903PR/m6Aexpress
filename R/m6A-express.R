@@ -93,21 +93,21 @@ m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir=NA){
     sigma <- solve(o$hessian)
 
     wdtest <- wald.test(b =as.numeric(one_new) , Sigma = sigma, Terms = 2)
-    pvalue <- as.numeric(wdtest$result$chi2[3])
-    one_data <- t(c(as.numeric(one_new),se.beta.hat, pvalue))
+    pvalues <- as.numeric(wdtest$result$chi2[3])
+    one_data <- t(c(as.numeric(one_new),se.beta.hat, pvalues))
     new_beta <- rbind(new_beta, one_data)
   }
   ##get loglike hood function of beta
   gene_name <-as.character(match_methy$Gene_ID)
   adj_beta <- cbind(gene_name, new_beta)
   colnames(adj_beta) <- c("gene_name", "Beta0","Beta1","SE_Beta0","SE_Beat1", "pvalue")
-  pvalue <- as.numeric(adj_beta$pvalue)
-  padj <- p.adjust(pvalue, method = "BH")
+  pvalues <- as.numeric(adj_beta$pvalue)
+  padj <- p.adjust(pvalues, method = "BH")
   padj_beta <- cbind(adj_beta, padj)
   if(is.na(out_dir)){
     out_dir = getwd()
   }
-   if (CUTOFF_TYPE =="padj") {
+   if (CUTOFF_TYPE =="FDR") {
      select_adjbeta <- padj_beta[padj_beta$padj<FDR,]
      write.table(select_adjbeta,file=paste(out_dir,"m6Aexpress_result","m6A-express_result.xls",sep="/"), sep="\t",row.names =FALSE,quote = FALSE)
 
