@@ -1,4 +1,4 @@
-m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir){
+m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir=NA){
   py_code <- system.file("extdata", "R_runpython.py", package = "m6Aexpress")
   source_python(py_code)
   fileNameCount=Input_file[[1]]
@@ -104,7 +104,9 @@ m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir){
   pvalue <- as.numeric(adj_beta$pvalue)
   padj <- p.adjust(pvalue, method = "BH")
   padj_beta <- cbind(adj_beta, padj)
-
+  if(is.na(out_dir)){
+    out_dir = getwd()
+  }
    if (CUTOFF_TYPE =="padj") {
      select_adjbeta <- padj_beta[padj_beta$padj<FDR,]
      write.table(select_adjbeta,file=paste(out_dir,"m6Aexpress_result","m6A-express_result.xls",sep="/"), sep="\t",row.names =FALSE,quote = FALSE)
