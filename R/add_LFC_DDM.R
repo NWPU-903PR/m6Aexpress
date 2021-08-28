@@ -1,7 +1,7 @@
-add_LFC_DDM <- function(expre_methyre, DE_gene, methy_intensity,num_cond1,OUTPUT_DIR){
+add_LFC_DDM <- function(expre_methyre, DE_gene, methy_intensity,num_cond1,OUTPUT_DIR=NA){
   DE_infor <- DE_gene[[3]]
-  control_methyintensity <- as.data.frame(methy_intensity[,1:num_cond1]) 
-  treated_mehtyintensity <- as.data.frame(methy_intensity[,-c(1:num_cond1)])
+  control_methyintensity <- as.data.frame(methy_intensity[,2:(num_cond1+1)]) 
+  treated_mehtyintensity <- as.data.frame(methy_intensity[,-c(1,2:(num_cond1+1))])
   DDM <- rowMeans(treated_mehtyintensity)-rowMeans(control_methyintensity)
   add_methyDDM <- data.frame(methy_intensity, DDM) 
   m6A_reg_expr_gene <- as.character(expre_methyre$gene_name)
@@ -13,5 +13,11 @@ add_LFC_DDM <- function(expre_methyre, DE_gene, methy_intensity,num_cond1,OUTPUT
     m6Aexpree_gene_DDMLFC <- rbind(m6Aexpree_gene_DDMLFC,one_DEDM)
   }
   return(m6Aexpree_gene_DDMLFC)
-  write.table(select_adjbeta,file=paste(OUTPUT_DIR,"m6Aexpress_result", "m6A_reg_exp_LFC_DDM.xls",sep="/"), sep="\t",row.names =FALSE,quote = FALSE)
+  if(is.na(OUTPUT_DIR)){
+    OUTPUT_DIR <- getwd()
+    write.table(m6Aexpree_gene_DDMLFC,file=paste(OUTPUT_DIR,"m6Aexpress_result", "m6A_reg_exp_LFC_DDM.xls",sep="/"), sep="\t",row.names =FALSE,quote = FALSE)
+  }
+  if(!is.na(OUTPUT_DIR)){
+     write.table(m6Aexpree_gene_DDMLFC,file=paste(OUTPUT_DIR,sep="/", "m6A_reg_exp_LFC_DDM.xls"), sep="\t",row.names =FALSE,quote = FALSE)
+  }
 }
