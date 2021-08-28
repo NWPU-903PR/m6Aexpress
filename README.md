@@ -123,8 +123,8 @@ m6Aexpress_result <- m6A_Express_model(Input_file=expr_methy_gene,
 ```                                            
 #### *Add differential expression and differential methylation in the result* 
 ```r
-m6A_express_addLFC_DDM <- add_LFC_DDM(expre_methyre=m6Areg_expr_gene, 
-                                    DE_gene=DE_gene, methy_distdecay=DM_methy,
+m6A_express_addLFC_DDM <- add_LFC_DDM(expre_methyre=m6Aexpress_result, 
+                                    DE_gene=DE_gene, methy_intensity=gene_methyintensity,
                                     num_cond1=2, OUTPUT_DIR=NA)
 ```
 ### For more than two conditions
