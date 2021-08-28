@@ -58,7 +58,7 @@ Teng Zhang <tengzhang126@163.com>
 \examples{
 \dontrun{
 ##match gene expression and methylation intensity of HVP gene
-expr_methy_gene <- match_expr_methy(gene_expre_infor=get_gene_express[[1]], 
+expr_methy_gene <- match_expr_methy(gene_expre_infor=get_gene_express, 
                                      gene_methy_infor=gene_methyintensity,
                                    OUTPUT_DIR=NA)
 ##predicate m6A-reg-exp gene
