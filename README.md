@@ -118,13 +118,13 @@ expr_methy_gene <- match_expr_methy(gene_count_infor=obtain_DEgene,
 #### *Predict m6A-reg-exp genes* 
 ```r
 m6Aexpress_result <- m6A_Express_model(Input_file=expr_methy_gene,
-                                           CUTOFF_TYPE="padj", 
+                                           CUTOFF_TYPE="FDR", 
                                             FDR=0.05)
 ```                                            
 #### *Add differential expression and differential methylation in the result* 
 ```r
 m6A_express_addLFC_DDM <- add_LFC_DDM(expre_methyre=m6Aexpress_result, 
-                                    DE_gene=DE_gene, methy_intensity=gene_methyintensity,
+                                    DE_gene=obtain_DEgene, methy_intensity=gene_methyintensity,
                                     num_cond1=2, OUTPUT_DIR=NA)
 ```
 ### For more than two conditions
