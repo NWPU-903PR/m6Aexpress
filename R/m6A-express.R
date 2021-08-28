@@ -105,16 +105,16 @@ m6A_Express_model <- function(Input_file,CUTOFF_TYPE,pvalue, FDR,out_dir=NA){
   padj <- p.adjust(pvalues, method = "BH")
   padj_beta <- cbind(adj_beta, padj)
   if(is.na(out_dir)){
-    out_dir = getwd()
+    out_dir = dirname(Input_file[[1]])
   }
    if (CUTOFF_TYPE =="FDR") {
      select_adjbeta <- padj_beta[padj_beta$padj<FDR,]
-     write.table(select_adjbeta,file=paste(out_dir,"m6Aexpress_result","m6A-express_result.xls",sep="/"), sep="\t",row.names =FALSE,quote = FALSE)
+     write.table(select_adjbeta,file=paste0(out_dir,sep="/","m6A-express_result.xls"), sep="\t",row.names =FALSE,quote = FALSE)
 
     }
   if (CUTOFF_TYPE =="pvalue") {
     select_adjbeta <- padj_beta[padj_beta$pvalue<pvalue,]
-    write.table(select_adjbeta,file=paste(out_dir,"m6Aexpress_result", "m6A-express_result.xls",sep="/"), sep="\t",row.names =FALSE,quote = FALSE)
+    write.table(select_adjbeta,file=paste0(out_dir,sep="/", "m6A-express_result.xls"), sep="\t",row.names =FALSE,quote = FALSE)
 
     }
    return(select_adjbeta)
