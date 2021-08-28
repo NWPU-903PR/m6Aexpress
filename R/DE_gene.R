@@ -23,5 +23,6 @@ Select_DEgene <- function(gene_count_infor,cond1, cond2,num_cond1, num_cond2,
   sig_DEgene <- na.omit(sig_DEgene)
   DE_gene_count <- gene_count[which(!is.na(match(rownames(gene_count), rownames(sig_DEgene)))),]
   DE_result <- list(DE_gene_count,size_factor,sig_DEgene)
+  names(DE_result) <- c("DE_genecount","library_sizefactor","DE_gene_infor")
   return(DE_result)
 }
